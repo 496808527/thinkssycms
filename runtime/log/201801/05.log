@@ -1,0 +1,945 @@
+[ 2018-01-05T15:30:05+08:00 ] 127.0.0.3 127.0.0.1 GET /admin
+[ log ] 127.0.0.3/admin [运行时间：0.071166s][吞吐率：14.05req/s] [内存消耗：2,804.44kb] [文件加载：62]
+[ info ] [ LANG ] E:\PHP\thinkssycms\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '127.0.0.3',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001035s ] mysql:dbname=thinkssycms;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yt_website` [ RunTime:0.005049s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_website` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000421s ]
+
+---------------------------------------------------------------
+[ 2018-01-05T15:30:05+08:00 ] 127.0.0.3 127.0.0.1 GET /admin/login/index.html
+[ log ] 127.0.0.3/admin/login/index.html [运行时间：0.037891s][吞吐率：26.39req/s] [内存消耗：2,221.27kb] [文件加载：55]
+[ info ] [ LANG ] E:\PHP\thinkssycms\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '127.0.0.3',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=v916sgr7pvpobmn2246ao01f94',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\admin\controller\Login->index[ E:\PHP\thinkssycms\application\admin\controller\Login.php ]
+[ info ] [ VIEW ] E:\PHP\thinkssycms\public/../application/admin\view\login\index.html [ array (
+  0 => 'webinfo',
+  1 => 'pindex',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-01-05T15:30:05+08:00 ] 127.0.0.3 127.0.0.1 GET /admin/login/image.html
+[ log ] 127.0.0.3/admin/login/image.html [运行时间：0.059985s][吞吐率：16.67req/s] [内存消耗：2,067.63kb] [文件加载：52]
+[ info ] [ LANG ] E:\PHP\thinkssycms\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'image',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '127.0.0.3',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36',
+  'accept' => 'image/webp,image/apng,image/*,*/*;q=0.8',
+  'referer' => 'http://127.0.0.3/admin/login/index.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=v916sgr7pvpobmn2246ao01f94',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\admin\controller\Login->image[ E:\PHP\thinkssycms\application\admin\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-01-05T15:30:07+08:00 ] 127.0.0.3 127.0.0.1 GET /admin/login/index.html
+[ log ] 127.0.0.3/admin/login/index.html [运行时间：0.051707s][吞吐率：19.34req/s] [内存消耗：2,071.64kb] [文件加载：53]
+[ info ] [ LANG ] E:\PHP\thinkssycms\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '127.0.0.3',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=v916sgr7pvpobmn2246ao01f94; Hm_lvt_080836300300be57b7f34f4b3e97d911=1515137406; Hm_lpvt_080836300300be57b7f34f4b3e97d911=1515137406',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\admin\controller\Login->index[ E:\PHP\thinkssycms\application\admin\controller\Login.php ]
+[ info ] [ VIEW ] E:\PHP\thinkssycms\public/../application/admin\view\login\index.html [ array (
+  0 => 'webinfo',
+  1 => 'pindex',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-01-05T15:30:07+08:00 ] 127.0.0.3 127.0.0.1 GET /admin/login/image.html
+[ log ] 127.0.0.3/admin/login/image.html [运行时间：0.040950s][吞吐率：24.42req/s] [内存消耗：2,067.70kb] [文件加载：52]
+[ info ] [ LANG ] E:\PHP\thinkssycms\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'image',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '127.0.0.3',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36',
+  'accept' => 'image/webp,image/apng,image/*,*/*;q=0.8',
+  'referer' => 'http://127.0.0.3/admin/login/index.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=v916sgr7pvpobmn2246ao01f94; Hm_lvt_080836300300be57b7f34f4b3e97d911=1515137406; Hm_lpvt_080836300300be57b7f34f4b3e97d911=1515137406',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\admin\controller\Login->image[ E:\PHP\thinkssycms\application\admin\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-01-05T15:30:07+08:00 ] 127.0.0.3 127.0.0.1 GET /admin/login/index.html
+[ log ] 127.0.0.3/admin/login/index.html [运行时间：0.046402s][吞吐率：21.55req/s] [内存消耗：2,071.64kb] [文件加载：53]
+[ info ] [ LANG ] E:\PHP\thinkssycms\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '127.0.0.3',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=v916sgr7pvpobmn2246ao01f94; Hm_lvt_080836300300be57b7f34f4b3e97d911=1515137406; Hm_lpvt_080836300300be57b7f34f4b3e97d911=1515137408',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\admin\controller\Login->index[ E:\PHP\thinkssycms\application\admin\controller\Login.php ]
+[ info ] [ VIEW ] E:\PHP\thinkssycms\public/../application/admin\view\login\index.html [ array (
+  0 => 'webinfo',
+  1 => 'pindex',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-01-05T15:30:08+08:00 ] 127.0.0.3 127.0.0.1 GET /admin/login/image.html
+[ log ] 127.0.0.3/admin/login/image.html [运行时间：0.040562s][吞吐率：24.65req/s] [内存消耗：2,067.71kb] [文件加载：52]
+[ info ] [ LANG ] E:\PHP\thinkssycms\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'image',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '127.0.0.3',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36',
+  'accept' => 'image/webp,image/apng,image/*,*/*;q=0.8',
+  'referer' => 'http://127.0.0.3/admin/login/index.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=v916sgr7pvpobmn2246ao01f94; Hm_lvt_080836300300be57b7f34f4b3e97d911=1515137406; Hm_lpvt_080836300300be57b7f34f4b3e97d911=1515137408',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\admin\controller\Login->image[ E:\PHP\thinkssycms\application\admin\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-01-05T15:30:08+08:00 ] 127.0.0.3 127.0.0.1 GET /admin/login/index.html
+[ log ] 127.0.0.3/admin/login/index.html [运行时间：0.042688s][吞吐率：23.43req/s] [内存消耗：2,071.64kb] [文件加载：53]
+[ info ] [ LANG ] E:\PHP\thinkssycms\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '127.0.0.3',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=v916sgr7pvpobmn2246ao01f94; Hm_lvt_080836300300be57b7f34f4b3e97d911=1515137406; Hm_lpvt_080836300300be57b7f34f4b3e97d911=1515137408',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\admin\controller\Login->index[ E:\PHP\thinkssycms\application\admin\controller\Login.php ]
+[ info ] [ VIEW ] E:\PHP\thinkssycms\public/../application/admin\view\login\index.html [ array (
+  0 => 'webinfo',
+  1 => 'pindex',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-01-05T15:30:08+08:00 ] 127.0.0.3 127.0.0.1 GET /admin/login/image.html
+[ log ] 127.0.0.3/admin/login/image.html [运行时间：0.039938s][吞吐率：25.04req/s] [内存消耗：2,067.70kb] [文件加载：52]
+[ info ] [ LANG ] E:\PHP\thinkssycms\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'image',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '127.0.0.3',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36',
+  'accept' => 'image/webp,image/apng,image/*,*/*;q=0.8',
+  'referer' => 'http://127.0.0.3/admin/login/index.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=v916sgr7pvpobmn2246ao01f94; Hm_lvt_080836300300be57b7f34f4b3e97d911=1515137406; Hm_lpvt_080836300300be57b7f34f4b3e97d911=1515137408',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\admin\controller\Login->image[ E:\PHP\thinkssycms\application\admin\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-01-05T15:30:08+08:00 ] 127.0.0.3 127.0.0.1 GET /admin/login/index.html
+[ log ] 127.0.0.3/admin/login/index.html [运行时间：0.043523s][吞吐率：22.98req/s] [内存消耗：2,071.64kb] [文件加载：53]
+[ info ] [ LANG ] E:\PHP\thinkssycms\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '127.0.0.3',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=v916sgr7pvpobmn2246ao01f94; Hm_lvt_080836300300be57b7f34f4b3e97d911=1515137406; Hm_lpvt_080836300300be57b7f34f4b3e97d911=1515137408',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\admin\controller\Login->index[ E:\PHP\thinkssycms\application\admin\controller\Login.php ]
+[ info ] [ VIEW ] E:\PHP\thinkssycms\public/../application/admin\view\login\index.html [ array (
+  0 => 'webinfo',
+  1 => 'pindex',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-01-05T15:30:08+08:00 ] 127.0.0.3 127.0.0.1 GET /admin/login/image.html
+[ log ] 127.0.0.3/admin/login/image.html [运行时间：0.040640s][吞吐率：24.61req/s] [内存消耗：2,067.70kb] [文件加载：52]
+[ info ] [ LANG ] E:\PHP\thinkssycms\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'image',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '127.0.0.3',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36',
+  'accept' => 'image/webp,image/apng,image/*,*/*;q=0.8',
+  'referer' => 'http://127.0.0.3/admin/login/index.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=v916sgr7pvpobmn2246ao01f94; Hm_lvt_080836300300be57b7f34f4b3e97d911=1515137406; Hm_lpvt_080836300300be57b7f34f4b3e97d911=1515137408',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\admin\controller\Login->image[ E:\PHP\thinkssycms\application\admin\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-01-05T15:30:08+08:00 ] 127.0.0.3 127.0.0.1 GET /admin/login/index.html
+[ log ] 127.0.0.3/admin/login/index.html [运行时间：0.042208s][吞吐率：23.69req/s] [内存消耗：2,071.64kb] [文件加载：53]
+[ info ] [ LANG ] E:\PHP\thinkssycms\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '127.0.0.3',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=v916sgr7pvpobmn2246ao01f94; Hm_lvt_080836300300be57b7f34f4b3e97d911=1515137406; Hm_lpvt_080836300300be57b7f34f4b3e97d911=1515137409',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\admin\controller\Login->index[ E:\PHP\thinkssycms\application\admin\controller\Login.php ]
+[ info ] [ VIEW ] E:\PHP\thinkssycms\public/../application/admin\view\login\index.html [ array (
+  0 => 'webinfo',
+  1 => 'pindex',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-01-05T15:30:08+08:00 ] 127.0.0.3 127.0.0.1 GET /admin/login/image.html
+[ log ] 127.0.0.3/admin/login/image.html [运行时间：0.042394s][吞吐率：23.59req/s] [内存消耗：2,067.75kb] [文件加载：52]
+[ info ] [ LANG ] E:\PHP\thinkssycms\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'image',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '127.0.0.3',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36',
+  'accept' => 'image/webp,image/apng,image/*,*/*;q=0.8',
+  'referer' => 'http://127.0.0.3/admin/login/index.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=v916sgr7pvpobmn2246ao01f94; Hm_lvt_080836300300be57b7f34f4b3e97d911=1515137406; Hm_lpvt_080836300300be57b7f34f4b3e97d911=1515137409',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\admin\controller\Login->image[ E:\PHP\thinkssycms\application\admin\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-01-05T15:30:21+08:00 ] 127.0.0.3 127.0.0.1 POST /admin/login/checkuserinfo.html
+[ log ] 127.0.0.3/admin/login/checkuserinfo.html [运行时间：0.038323s][吞吐率：26.09req/s] [内存消耗：2,037.61kb] [文件加载：51]
+[ info ] [ LANG ] E:\PHP\thinkssycms\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'checkuserinfo',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '127.0.0.3',
+  'connection' => 'keep-alive',
+  'content-length' => '40',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'origin' => 'http://127.0.0.3',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'referer' => 'http://127.0.0.3/admin/login/index.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=v916sgr7pvpobmn2246ao01f94; Hm_lvt_080836300300be57b7f34f4b3e97d911=1515137406; Hm_lpvt_080836300300be57b7f34f4b3e97d911=1515137409',
+)
+[ info ] [ PARAM ] array (
+  'username' => 'admin',
+  'password' => '201777',
+  'code' => '38p6',
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\admin\controller\Login->checkuserinfo[ E:\PHP\thinkssycms\application\admin\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-01-05T15:30:22+08:00 ] 127.0.0.3 127.0.0.1 GET /admin/login/image/0.9775258448168771.html
+[ log ] 127.0.0.3/admin/login/image/0.9775258448168771.html [运行时间：0.043968s][吞吐率：22.74req/s] [内存消耗：2,067.79kb] [文件加载：52]
+[ info ] [ LANG ] E:\PHP\thinkssycms\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'image',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '127.0.0.3',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36',
+  'accept' => 'image/webp,image/apng,image/*,*/*;q=0.8',
+  'referer' => 'http://127.0.0.3/admin/login/index.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=v916sgr7pvpobmn2246ao01f94; Hm_lvt_080836300300be57b7f34f4b3e97d911=1515137406; Hm_lpvt_080836300300be57b7f34f4b3e97d911=1515137409',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\admin\controller\Login->image[ E:\PHP\thinkssycms\application\admin\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-01-05T15:30:24+08:00 ] 127.0.0.3 127.0.0.1 GET /admin/login/image/0.4823964056327459.html
+[ log ] 127.0.0.3/admin/login/image/0.4823964056327459.html [运行时间：0.038788s][吞吐率：25.78req/s] [内存消耗：2,067.80kb] [文件加载：52]
+[ info ] [ LANG ] E:\PHP\thinkssycms\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'image',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '127.0.0.3',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36',
+  'accept' => 'image/webp,image/apng,image/*,*/*;q=0.8',
+  'referer' => 'http://127.0.0.3/admin/login/index.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=v916sgr7pvpobmn2246ao01f94; Hm_lvt_080836300300be57b7f34f4b3e97d911=1515137406; Hm_lpvt_080836300300be57b7f34f4b3e97d911=1515137409',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\admin\controller\Login->image[ E:\PHP\thinkssycms\application\admin\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-01-05T15:30:27+08:00 ] 127.0.0.3 127.0.0.1 POST /admin/login/checkuserinfo.html
+[ log ] 127.0.0.3/admin/login/checkuserinfo.html [运行时间：0.051022s][吞吐率：19.60req/s] [内存消耗：2,767.75kb] [文件加载：59]
+[ info ] [ LANG ] E:\PHP\thinkssycms\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'checkuserinfo',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '127.0.0.3',
+  'connection' => 'keep-alive',
+  'content-length' => '40',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'origin' => 'http://127.0.0.3',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'referer' => 'http://127.0.0.3/admin/login/index.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=v916sgr7pvpobmn2246ao01f94; Hm_lvt_080836300300be57b7f34f4b3e97d911=1515137406; Hm_lpvt_080836300300be57b7f34f4b3e97d911=1515137409',
+)
+[ info ] [ PARAM ] array (
+  'username' => 'admin',
+  'password' => '201777',
+  'code' => '5fev',
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\admin\controller\Login->checkuserinfo[ E:\PHP\thinkssycms\application\admin\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000780s ] mysql:dbname=thinkssycms;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yt_admins` [ RunTime:0.003589s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_admins` WHERE  `username` = 'admin' LIMIT 1 [ RunTime:0.000435s ]
+
+---------------------------------------------------------------
+[ 2018-01-05T15:30:27+08:00 ] 127.0.0.3 127.0.0.1 GET /admin/login/image/0.24475410308627543.html
+[ log ] 127.0.0.3/admin/login/image/0.24475410308627543.html [运行时间：0.043102s][吞吐率：23.20req/s] [内存消耗：2,067.77kb] [文件加载：52]
+[ info ] [ LANG ] E:\PHP\thinkssycms\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'image',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '127.0.0.3',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36',
+  'accept' => 'image/webp,image/apng,image/*,*/*;q=0.8',
+  'referer' => 'http://127.0.0.3/admin/login/index.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=v916sgr7pvpobmn2246ao01f94; Hm_lvt_080836300300be57b7f34f4b3e97d911=1515137406; Hm_lpvt_080836300300be57b7f34f4b3e97d911=1515137409',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\admin\controller\Login->image[ E:\PHP\thinkssycms\application\admin\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-01-05T15:30:36+08:00 ] 127.0.0.3 127.0.0.1 POST /admin/login/checkuserinfo.html
+[ log ] 127.0.0.3/admin/login/checkuserinfo.html [运行时间：0.053053s][吞吐率：18.85req/s] [内存消耗：2,767.75kb] [文件加载：59]
+[ info ] [ LANG ] E:\PHP\thinkssycms\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'checkuserinfo',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '127.0.0.3',
+  'connection' => 'keep-alive',
+  'content-length' => '40',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'origin' => 'http://127.0.0.3',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'referer' => 'http://127.0.0.3/admin/login/index.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=v916sgr7pvpobmn2246ao01f94; Hm_lvt_080836300300be57b7f34f4b3e97d911=1515137406; Hm_lpvt_080836300300be57b7f34f4b3e97d911=1515137409',
+)
+[ info ] [ PARAM ] array (
+  'username' => 'admin',
+  'password' => '201477',
+  'code' => 'k6ae',
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\admin\controller\Login->checkuserinfo[ E:\PHP\thinkssycms\application\admin\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000803s ] mysql:dbname=thinkssycms;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yt_admins` [ RunTime:0.003895s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_admins` WHERE  `username` = 'admin' LIMIT 1 [ RunTime:0.000415s ]
+
+---------------------------------------------------------------
+[ 2018-01-05T15:30:37+08:00 ] 127.0.0.3 127.0.0.1 POST /admin/login/index.html
+[ log ] 127.0.0.3/admin/login/index.html [运行时间：0.089694s][吞吐率：11.15req/s] [内存消耗：2,881.97kb] [文件加载：64]
+[ info ] [ LANG ] E:\PHP\thinkssycms\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '127.0.0.3',
+  'connection' => 'keep-alive',
+  'content-length' => '83',
+  'cache-control' => 'max-age=0',
+  'origin' => 'http://127.0.0.3',
+  'upgrade-insecure-requests' => '1',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://127.0.0.3/admin/login/index.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=v916sgr7pvpobmn2246ao01f94; Hm_lvt_080836300300be57b7f34f4b3e97d911=1515137406; Hm_lpvt_080836300300be57b7f34f4b3e97d911=1515137409',
+)
+[ info ] [ PARAM ] array (
+  'username' => 'admin',
+  'password' => '201477',
+  'code' => 'k6ae',
+  '__token__' => '55834d206201630180dadacf88790fe3',
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\admin\controller\Login->index[ E:\PHP\thinkssycms\application\admin\controller\Login.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001059s ] mysql:dbname=thinkssycms;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yt_admins` [ RunTime:0.033072s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_admins` WHERE  `username` = 'admin' LIMIT 1 [ RunTime:0.000271s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yt_roles` [ RunTime:0.003297s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_roles` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000353s ]
+
+---------------------------------------------------------------
+[ 2018-01-05T15:30:37+08:00 ] 127.0.0.3 127.0.0.1 GET /admin/index/index.html
+[ log ] 127.0.0.3/admin/index/index.html [运行时间：0.100191s][吞吐率：9.98req/s] [内存消耗：3,421.04kb] [文件加载：68]
+[ info ] [ LANG ] E:\PHP\thinkssycms\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'index',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '127.0.0.3',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://127.0.0.3/admin/login/index.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=v916sgr7pvpobmn2246ao01f94; Hm_lvt_080836300300be57b7f34f4b3e97d911=1515137406; Hm_lpvt_080836300300be57b7f34f4b3e97d911=1515137409; roolname=%E8%B6%85%E7%BA%A7%E7%AE%A1%E7%90%86%E5%91%98; nickname=admin',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Index->index[ E:\PHP\thinkssycms\application\admin\controller\Index.php ]
+[ info ] [ VIEW ] E:\PHP\thinkssycms\public/../application/admin\view\index\index.html [ array (
+  0 => 'webinfo',
+  1 => 'pindex',
+  2 => 'menulist',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000552s ] mysql:dbname=thinkssycms;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yt_admins` [ RunTime:0.003872s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_admins` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000268s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yt_rolemap` [ RunTime:0.003333s ]
+[ sql ] [ SQL ] SELECT `permid` FROM `yt_rolemap` WHERE  `roleid` = 1  AND `status` = 1 [ RunTime:0.000348s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yt_permission` [ RunTime:0.003504s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `id` IN (1,2,8,3,10,3,6,9,7,5,4,12,13,14,15,47,46,45,44,74,73,72,43,39,38,42,36,37,34,33,32,50,71,51,52,53,54,55,56,57,58,70,59,60,61,62,63,64,65,66,67,68,69,75)  AND `parentid` = 0 [ RunTime:0.000496s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `id` IN (1,2,8,3,10,3,6,9,7,5,4,12,13,14,15,47,46,45,44,74,73,72,43,39,38,42,36,37,34,33,32,50,71,51,52,53,54,55,56,57,58,70,59,60,61,62,63,64,65,66,67,68,69,75)  AND `parentid` = 1 [ RunTime:0.000466s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 2 [ RunTime:0.000266s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 5 [ RunTime:0.000188s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 6 [ RunTime:0.000160s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 9 [ RunTime:0.000154s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 3 [ RunTime:0.000167s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 8 [ RunTime:0.000156s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 10 [ RunTime:0.000150s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 4 [ RunTime:0.000163s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 12 [ RunTime:0.000209s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 13 [ RunTime:0.000171s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `id` IN (1,2,8,3,10,3,6,9,7,5,4,12,13,14,15,47,46,45,44,74,73,72,43,39,38,42,36,37,34,33,32,50,71,51,52,53,54,55,56,57,58,70,59,60,61,62,63,64,65,66,67,68,69,75)  AND `parentid` = 7 [ RunTime:0.000339s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 39 [ RunTime:0.000423s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 47 [ RunTime:0.000493s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 48 [ RunTime:0.000263s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 49 [ RunTime:0.000201s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 50 [ RunTime:0.000167s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 71 [ RunTime:0.000154s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 44 [ RunTime:0.000176s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 45 [ RunTime:0.000178s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 46 [ RunTime:0.000155s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 68 [ RunTime:0.000152s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 72 [ RunTime:0.000156s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 73 [ RunTime:0.000165s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 74 [ RunTime:0.000152s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `id` IN (1,2,8,3,10,3,6,9,7,5,4,12,13,14,15,47,46,45,44,74,73,72,43,39,38,42,36,37,34,33,32,50,71,51,52,53,54,55,56,57,58,70,59,60,61,62,63,64,65,66,67,68,69,75)  AND `parentid` = 14 [ RunTime:0.000320s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 15 [ RunTime:0.000186s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 67 [ RunTime:0.000233s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `id` IN (1,2,8,3,10,3,6,9,7,5,4,12,13,14,15,47,46,45,44,74,73,72,43,39,38,42,36,37,34,33,32,50,71,51,52,53,54,55,56,57,58,70,59,60,61,62,63,64,65,66,67,68,69,75)  AND `parentid` = 34 [ RunTime:0.000513s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 38 [ RunTime:0.000235s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 37 [ RunTime:0.000232s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 52 [ RunTime:0.000236s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 36 [ RunTime:0.000268s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 42 [ RunTime:0.000199s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 43 [ RunTime:0.000211s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 75 [ RunTime:0.000173s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 55 [ RunTime:0.000389s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `id` IN (1,2,8,3,10,3,6,9,7,5,4,12,13,14,15,47,46,45,44,74,73,72,43,39,38,42,36,37,34,33,32,50,71,51,52,53,54,55,56,57,58,70,59,60,61,62,63,64,65,66,67,68,69,75)  AND `parentid` = 32 [ RunTime:0.000504s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 33 [ RunTime:0.000325s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 56 [ RunTime:0.000280s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 58 [ RunTime:0.000275s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 69 [ RunTime:0.000292s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 70 [ RunTime:0.000295s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 51 [ RunTime:0.000338s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 53 [ RunTime:0.000418s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 54 [ RunTime:0.000360s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 57 [ RunTime:0.000368s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 59 [ RunTime:0.000321s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 62 [ RunTime:0.000277s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 63 [ RunTime:0.000198s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `id` IN (1,2,8,3,10,3,6,9,7,5,4,12,13,14,15,47,46,45,44,74,73,72,43,39,38,42,36,37,34,33,32,50,71,51,52,53,54,55,56,57,58,70,59,60,61,62,63,64,65,66,67,68,69,75)  AND `parentid` = 60 [ RunTime:0.000547s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 61 [ RunTime:0.000424s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `id` IN (1,2,8,3,10,3,6,9,7,5,4,12,13,14,15,47,46,45,44,74,73,72,43,39,38,42,36,37,34,33,32,50,71,51,52,53,54,55,56,57,58,70,59,60,61,62,63,64,65,66,67,68,69,75)  AND `parentid` = 64 [ RunTime:0.000473s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 65 [ RunTime:0.000509s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_permission` WHERE  `parentid` = 66 [ RunTime:0.000367s ]
+
+---------------------------------------------------------------
+[ 2018-01-05T15:30:37+08:00 ] 127.0.0.3 127.0.0.1 GET /admin/index/welcome.html
+[ log ] 127.0.0.3/admin/index/welcome.html [运行时间：0.131764s][吞吐率：7.59req/s] [内存消耗：3,165.25kb] [文件加载：66]
+[ info ] [ LANG ] E:\PHP\thinkssycms\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'index',
+    2 => 'welcome',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '127.0.0.3',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://127.0.0.3/admin/index/index.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=v916sgr7pvpobmn2246ao01f94; Hm_lvt_080836300300be57b7f34f4b3e97d911=1515137406; Hm_lpvt_080836300300be57b7f34f4b3e97d911=1515137409; roolname=%E8%B6%85%E7%BA%A7%E7%AE%A1%E7%90%86%E5%91%98; nickname=admin',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Index->welcome[ E:\PHP\thinkssycms\application\admin\controller\Index.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001859s ] mysql:dbname=thinkssycms;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yt_admins` [ RunTime:0.004077s ]
+[ sql ] [ SQL ] SELECT * FROM `yt_admins` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000373s ]
+[ error ] [1]Class 'app\common\logic\WelComeLogic' not found[E:\PHP\thinkssycms\application\admin\controller\Index.php:35]
+
+---------------------------------------------------------------
