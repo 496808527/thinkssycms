@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {include file='index/header' /}
+		<link rel="stylesheet" href="__WAP__/css/main.css" />
+		<link rel="stylesheet" href="__WAP__/css/iosSelect.css" />
+		<script type="text/javascript" src="__WAP__/js/rem.js" ></script>
+	</head>
+    
+    
+    <body>
+      <div class="header"><i></i>{$name}<!--<span>〓</span>--></div>
+    
+<!--     <div class="menu">
+      <ul>
+         <li topage="{:url('orders/personcenter')}">个人中心</li>
+        <li topage="{:url('orders/index')}">我要报单</li>
+        <li topage="{:url('orders/main')}">待审核的报单</li>
+        <li topage="{:url('orders/mainlist')}">已审核的报单</li>
+        <li topage="{:url('orders/refuselist')}">已拒绝的报单</li>
+        <li topage="{:url('orders/cars')}">直通车</li>
+         <li topage="{:url('orders/baseorder')}">我的底单</li>
+        <li topage="{:url('orders/baselist')}">代理底单</li>
+      </ul>
+    </div>-->
+
+      <div class="ordersform">
+        <div class="warning" style="margin-top: 0.3rem;">请在汇款次日24点之前完成报单，否则系统不能生成奖金</div>
+        <form id="ordersform">
+          <p><span>汇款人：</span><input name="bankuser" type='text'  data-msg="汇款人不能为空！" ></p>
+          <p><span>汇款金额：</span><input name="remitaccount" type='text' data-msg="汇款金额不能为空！"></p>
+          <p id="selectDate"><span>汇款日期：</span><input name="remittime" type='text' id="picktime" readonly="readonly"></p>
+          <p><span>入单人姓名：</span><input name="remituser" type='text'  data-msg="请填写正确的入单人姓名！"></p>
+          <p><span>入单人身份证：</span><input name="remitidcard" type='text' pattern="(^\d{15}$)|(^\d{17}([0-9]|X)$)" maxlength="18"  data-msg="请填写正确的汇款人身份证！"></p>
+          <p><span>入单人电话：</span><input name="remittel" type='text' pattern="^1[3,4,5,7,8]\d{9}$" data-msg="请填写正确的汇款人电话号码！"></p>
+          <p><span>推荐人：</span><input name="recomeuser" type='text'  data-msg="请填写正确的推荐人姓名！"></p>
+          <p><span>积分平台类型：</span>
+            <select name="platform">
+              {foreach name='flatfrom' item="flat"}
+              <option value="{$key}">{$flat}</option>
+              {/foreach}
+            </select>
+          </p>
+          <p><span>是否代理底单：</span>
+            <select name="isrecome">
+              <option value="0">普通报单&nbsp;&nbsp;汇款1W元</option>
+              <option value="1">代理底单&nbsp;&nbsp;汇款9998元</option>
+            </select>
+          </p>
+          <p><span>返还积分ID：</span><input name="platformid" type='text'  data-msg="返还积分ID不能为空！"></p>
+          <p><span>返还积分手机：</span><input name="platformtel" type='text'  pattern="^1[3,4,5,7,8,9]\d{9}$" data-msg="请填写正确的返还积分手机号码！" ></p>
+          <p>
+            <span>汇款凭证：</span>
+            <b >上传凭证<input id="uploadremit" type="file" accept="image/*" /></b>
+          </p>
+          
+          <div class="uploadfiles">
+            <ul>
+            </ul>
+          </div>
+          <p class="border-none"><input class="btn_ok" type="button" value="确定"></p>
+          
+        </form>
+        <input type="hidden" id="uploadid" name="uploadid" value="{$uploadid}">
+      </div>
+      
+      <div class="tips"></div>
+      
+<!--      <div class="footer">
+        <ul>
+          <li class="active">
+            <a href="{:url('orders/index')}">我要报单</a>
+            
+          </li>
+          <li>
+              <a href="{:url('orders/main')}">我的报单</a>
+          </li>
+        </ul>
+      </div>-->
+      
+      <script type="text/javascript" src="__WAP__/js/zepto.js" ></script>
+      <script type="text/javascript" src="__WAP__/js/iosSelect.js" ></script>
+      <script>
+        var selectDateDom = $('#selectDate');
+        var showDateDom = $('#picktime');
+      </script>
+      <script  type="text/javascript"   src="__WAP__/js/detaselect.js"></script>
+      <script src="__WAP__/js/mobileupload.js"></script>
+      <script>
+        $(".header span").click(function () {
+          $(".menu").toggle();
+        });
+        
+        $(".header i").click(function(){
+          window.history.go(-1);
+        })
+        
+        $(".menu ul li").click(function(){
+          window.location.href=$(this).attr("topage")
+        });
+        
+       
+        
+        $("#uploadremit").change(function () {
+          var file = this.files[0];
+          name = file.name;
+          if(!name){
+           $("#tips").text("请选择文件").show();
+            return false;
+          }
+          size = file.size;
+          type = file.type;
+          url = window.URL.createObjectURL(file); //获取本地文件的url，如果是图片文件，可用于预览图片
+          form = document.getElementById("myform");
+          sendurl = "{:url('util/simpleupload/upload')}";
+          savepath= "{$savepath}";
+          uploadid=$("#uploadid").val();
+          filedata = {file:file,name: name, size: size, type: type, fileurl: url, form: form, sendurl: sendurl,uploadid:uploadid,savepath:savepath}
+          simple = new SimpleUpload(filedata);
+          simple.Upload(simple);
+      })
+      
+      $(".btn_ok").click(function(){
+        state=true;
+        $("#ordersform input[type='text']").each(function () {
+            if ($(this).attr("name") != "agentparent") {
+              tempval = $(this).val();
+              datamsg = $(this).attr("data-msg");
+              if (!tempval) {
+                $(".tips").html(datamsg).show();
+                state = false;
+                setTimeout(function(){
+                    $(".tips").hide();
+                  },1000);
+                return false;
+              }
+              if ($(this)[0].hasAttribute("pattern")) {
+                reg = eval("/" + $(this).attr("pattern") + "/");
+                if (!reg.test(tempval)) {
+                    $(".tips").html(datamsg).show();
+                    state = false;
+                    setTimeout(function(){
+                      $(".tips").hide();
+                    },1000);
+                    return false;
+                }
+              }
+            }
+          });
+        if(state){
+         a= $(".uploadfiles").find("input[type='hidden']");
+          if(a.length==0){
+             $(".tips").html("请上传支付凭证").show();
+                  state = false;
+                  setTimeout(function(){
+                    $(".tips").hide();
+                  },1000);
+            return false;       
+          }
+
+          url="{:url('index')}";
+          ordersdata=$("#ordersform").serialize();
+          $.post(url,ordersdata,function(data){
+            if(data.state=='err'){
+                $(".tips").html(data.msg).show();
+                  state = false;
+                  setTimeout(function(){
+                    $(".tips").hide();
+                  },1000);
+            }else{
+              $(".tips").html(data.msg).show();
+              setTimeout(function(){
+                window.location.href=data.tourl;
+              },2000);
+            }
+          })
+        }
+        
+      });
+      </script>
+    </body>
+    
+    
+</html>

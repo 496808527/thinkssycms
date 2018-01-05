@@ -1,0 +1,53 @@
+.after:after {
+  display: block;
+  content: "";
+  clear: both; }
+
+html {
+  height: 100%; }
+html body {
+  height: 100%;
+  margin: 0; }
+html body .container .form .logos {
+  width: 20%;
+  height: 10%;
+  margin: 30px auto 20px;
+  display: block; }
+html body .container .form .form-horizontal .logos {
+  width: 150px;
+  height: 150px;
+  margin: 100px auto 20px;
+  display: block; }
+html body .container .form .form-horizontal .col-sm-9 {
+  margin: 0 20px; }
+html body .container .form .form-horizontal .col-sm-9 .form-group {
+  margin-top: 15px; }
+html body .container .form .form-horizontal .col-sm-9 .form-group .form-control {
+  margin-top: 5px; }
+html body .container .form .form-horizontal .col-sm-9 .form-group .btn {
+  width: 100%; 
+  
+}
+html body .container .form .form-horizontal .col-sm-9 .form-group .fa-check_p {
+  font-size: 14px; }
+html body .container .form .form-horizontal .col-sm-9 .form-group .fa-check_p .fa-check_span {
+  color: red; }
+html body .container .form .form-horizontal .col-sm-9 .form-group img {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  display: block;
+  margin: 0 auto; }
+html body .container .form .form-horizontal .col-sm-9 .form-label {
+  width: 100%;
+  font-weight: 400;
+  margin: 0px -15px; }
+html body .container .form .form-horizontal .col-sm-9 .form-label span {
+  display: block;
+  margin-bottom: 10px; }
+html body .container .form .form-horizontal .col-sm-9 .form-label .form-input {
+  margin: 0 10px 15px 0; }
+
+
+
+/*# sourceMappingURL=index1.css.map */

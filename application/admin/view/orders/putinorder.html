@@ -1,0 +1,99 @@
+{include file='index/meta' /}
+
+<title>{$title}</title>
+</head>
+<body>
+  <nav class="breadcrumb">
+
+    {notempty name="menustr"}
+    {$menustr}
+    {/notempty}
+
+
+    <a class="btn btn-success btn-refresh radius r" style="line-height:1.6em;margin-top:3px" href="javascript:;" title="刷新" >
+      <i class="Hui-iconfont">&#xe68f;</i></a>
+  </nav>
+
+  <div class="page-container">
+    <div class="warning">
+      <h3>老系统的数据导入新系统注意事项</h3>
+      <p>1.代理商的电话必须准确，且在新系统注册</p>
+      <p>2.排单编号必须是阿拉伯数字，且不重复</p>
+      <p>3.导入的数据，不会生成财务报表</p>
+      <p>4.导入文件必须是Excel的.csv类型的后缀【文件另存为就可以达到】</p>
+    </div>
+    <div class="uploadorders">
+      <p>
+        <label>现金报单数据:</label><input type="text" class="input-text" id="cash" placeholder="上传现金报单数据" readonly="readonly"
+                onclick="admin_role_add('上传现金报单数据:','{:url("util/Simpleupload/index",['t'=>rand(),"con"=>"cash"])}',420,360)" />
+           <button class="btn-success btn cashbtn">导入</button>
+      </p>
+      <p>
+        <label>积分报单数据:</label><input type="text" class="input-text" id="point"  placeholder="上传积分报单数据" readonly="readonly"
+               onclick="admin_role_add('上传积分报单数据','{:url("util/Simpleupload/index",['t'=>rand(),"con"=>"point"])}',420,360)" /> 
+               <button class="btn-success btn pointbtn">导入</button>
+      </p>
+      <div class="info">
+        <p>成功导入XXX条数据，还有多少条数据没有导入</p>
+        <p>下载未成功的文件数据</p>
+      </div>
+    </div>
+   
+
+  </div>
+
+
+
+  {include file='index/footer' /}
+  <script type="text/javascript" src="__ADMIN__/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+  <script  type="text/javascript">
+    /*管理员-角色-添加*/
+    function admin_role_add(title, url, w, h) {
+      layer_show(title, url, w, h);
+    }
+
+    $(".btn-refresh").click(function () {
+      location.replace(location.href)
+    });
+    
+    $(".cashbtn").click(function(){
+        var filepath=$("#cash").val();
+        if(!filepath){
+          layer.msg("请先导入需要上传的文件");
+          return false;
+        }
+        var url="{:url('putincash')}";
+        var postdata={filepath:filepath};
+        $.post(url,postdata,function(data){
+          layer.msg(data.msg);
+          var strhtml = ' <p>成功导入'+data.data.putin+'条数据，还有'+(data.data.total-2-data.data.putin)+'条数据没有导入</p>';
+          if(data.data.downfile!=null){
+            strhtml+='  <p><a href="/'+data.data.downfile+'">下载未成功的文件数据</p>';
+          }
+          $(".info").html(strhtml);
+        });
+    });
+    
+    $(".pointbtn").click(function(){
+        var filepath=$("#point").val();
+        if(!filepath){
+          layer.msg("请先导入需要上传的文件");
+          return false;
+        }
+        var url="{:url('putinpoint')}";
+        var postdata={filepath:filepath};
+        $.post(url,postdata,function(data){
+          layer.msg(data.msg);
+          var strhtml = ' <p>成功导入'+data.data.putin+'条数据，还有'+(data.data.total-2-data.data.putin)+'条数据没有导入</p>';
+          if(data.data.downfile!=null){
+            strhtml+='  <p><a href="/'+data.data.downfile+'">下载未成功的文件数据</p>';
+          }
+          $(".info").html(strhtml);
+        });
+    });
+   
+
+  </script>
+
+</body>
+</html>

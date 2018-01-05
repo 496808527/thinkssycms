@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {include file='index/header' /}
+    <link rel="stylesheet" href="__WAP__/css/main.css" />
+    <script type="text/javascript" src="__WAP__/js/rem.js" ></script>
+  </head>
+
+  <body>
+    <div class="header"><i></i>{$name}</div>
+    
+     <div class="personmenu">
+      <ul>
+        <li>我的推荐码：<i>{$info.agentno}</i></li>
+        <li>代理区域：<i>{$info.agentarea}</i></li>
+        <li>联系电话： <i>{$info.agenttel}</i></li>
+        <li  topage="{:url('Member/updatebank')}" >收款卡号：<i>{$info.agentbankcard}</i><span></span></li>
+       <li class="border-none">收款地址：<i>{$info.agentaddr}</i></li>
+      </ul>
+      
+    </div>
+     <script src="__JS__/jquery.min.js"></script>
+     <script src="__WAP__/js/orders.js"></script>
+   
+  </body>
+</html>

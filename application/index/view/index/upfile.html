@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {include file='index/header' /}
+    <link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/index.css"/>
+    <script src="__JS__/jquery.min.js"></script>
+    <script src="__JS__/bootstrap.js"></script>
+    <script type="text/javascript" src="__WAP__/js/rem.js" ></script>
+    <link rel="stylesheet" href="__WAP__/css/main.css" />
+  </head>
+  <body>
+    <div class="headerfindpwd"><i></i>{$name}</div>
+    <form id="ordersform">
+      <div class="ordersform">
+        <div class="warning">请各位代理商，每个礼拜的星期一上传上周奖金对账表和直通车对账表，每个月的1号上传上月的对账表，谢谢合作！ </div>
+        <p class="downfile"><span>下载模板：</span><b datafile="/{$webinfo['excelmuban']}">下载模板</b>
+        <p>
+          <span>上传对账表：</span>
+          <b >上传对账表<input id="uploadremit" type="file" /></b>
+        </p>
+
+        <div class="uploadfiles">
+          <ul>
+          </ul>
+        </div>
+        <p class="border-none"><input class="btn_ok" type="button" value="确定"></p>
+      </div>
+    </form>
+    <input type="hidden" id="uploadid" name="uploadid" value="{$uploadid}">
+
+    <div class="tips"></div>
+
+    <script src="__JS__/jquery.min.js"></script>
+
+    <script src="__WAP__/js/mobileupload.js"></script>
+    <script>
+      $(".headerfindpwd i").click(function () {
+        window.location.href = "{:url('orders/personcenter')}";
+      });
+
+      $("#uploadremit").change(function () {
+        var file = this.files[0];
+        name = file.name;
+        if (!name) {
+          $("#tips").text("请选择文件").show();
+          return false;
+        }
+        size = file.size;
+        type = file.type;
+        url = window.URL.createObjectURL(file); //获取本地文件的url，如果是图片文件，可用于预览图片
+        form = document.getElementById("myform");
+        sendurl = "{:url('util/simpleupload/upload')}";
+        savepath = "{$savepath}";
+        uploadid = $("#uploadid").val();
+        filedata = {file: file, name: name, size: size, type: type, fileurl: url, form: form, sendurl: sendurl, uploadid: uploadid, savepath: savepath}
+        simple = new SimpleUpload(filedata);
+        simple.Upload(simple);
+      });
+
+      $(".downfile b").click(function () {
+        window.location.href = $(this).attr("datafile");
+      })
+
+      $(".btn_ok").click(function () {
+        a = $(".uploadfiles").find("input[type='hidden']");
+        if (a.length == 0) {
+          $(".tips").html("请上传对账表").show();
+          setTimeout(function () {
+            $(".tips").hide();
+          }, 1000);
+          return false;
+        }
+        url = "{:url('index/upfile')}";
+        ordersdata = $("#ordersform").serialize();
+        $.post(url, ordersdata, function (data) {
+          if (data.state == 'err') {
+            $(".tips").html(data.msg).show();
+            setTimeout(function () {
+              $(".tips").hide();
+            }, 1000);
+          } else {
+            $(".tips").html(data.msg).show();
+            setTimeout(function () {
+              window.location.href = data.tourl;
+            }, 2000);
+          }
+        })
+
+
+      })
+
+    </script>
+  </body>
+</html>

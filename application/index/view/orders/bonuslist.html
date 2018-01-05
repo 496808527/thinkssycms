@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {include file='index/header' /}
+    <link rel="stylesheet" href="__WAP__/css/main.css" />
+    <script type="text/javascript" src="__WAP__/js/rem.js" ></script>
+  </head>
+
+  <body>
+   <div class="header">
+      <i></i>{$name}<b></b>
+      <div class="search">
+        <input type="text" name="keyword" placeholder="请输入你需要查询的月份" readonly="readonly" />
+      </div>
+    </div>
+    
+
+
+    <div class="personmenu">
+      <ul>
+        {foreach name='list' item='item'}
+        <li topage="{:url('orders/bonusinfo',['index'=>$key])}" {eq name='key' value='7'} class="border-none"{/eq}>{$item.text}<span></span></li>
+        {/foreach}
+        
+      </ul>
+      
+    </div>
+    
+    <script src="__JS__/jquery.min.js"></script>
+    <script src="__WAP__/js/orders.js"></script>
+
+   
+  </body>
+</html>

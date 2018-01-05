@@ -1,0 +1,99 @@
+{include file='index/meta' /}
+
+</head>
+<body>
+
+  <article class="page-container">
+    <form action="" method="post" class="form form-horizontal" id="form-admin-role-add">
+      <input type="hidden" name="id" value="{$info.id}" />
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>角色名称：</label>
+        <div class="formControls col-xs-8 col-sm-8">
+          <input type="text" class="input-text" value="{$info.rolename}" placeholder="" id="roleName" name="rolename">
+        </div>
+      </div>
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-3">备注：</label>
+        <div class="formControls col-xs-8 col-sm-8">
+          <input type="text" class="input-text" value="{$info.remark}" placeholder="" id="" name="remark">
+        </div>
+      </div>
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-3">网站权限：</label>
+        <div class="formControls col-xs-8 col-sm-8">
+          
+          {foreach $permlist as $perm} 
+          <dl class="permission-list">
+            <dt>
+              <label>
+                <input type="checkbox" value="{$perm['id']}" {:in_array($perm["id"],$roleperm)?'checked':''}   name="permid[]" id="user-Character-0">
+                {$perm["permname"]}</label>
+            </dt>
+            <dd>
+             {:role_permlist($perm["childs"],$roleperm,"permid[]")}
+              
+            </dd>
+          </dl>
+          {/foreach}
+        </div>
+      </div>
+      <div class="row cl">
+        <div class="col-xs-8 col-sm-8 col-xs-offset-4 col-sm-offset-3">
+          <button type="button" onclick="submitform()" class="btn btn-success radius" id="admin-role-save" name="admin-role-save"><i class="icon-ok"></i> 确定</button>
+        </div>
+      </div>
+    </form>
+  </article>
+
+
+  {include file='index/footer' /}
+  
+  
+  <!--请在下方写此页面业务相关的脚本-->
+  <script type="text/javascript" src="__ADMIN__/lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+  <script type="text/javascript" src="__ADMIN__/lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+  <script type="text/javascript" src="__ADMIN__/lib/jquery.validation/1.14.0/messages_zh.js"></script> 
+  <script type="text/javascript">
+    $(function () {
+      $(".permission-list dt input:checkbox").click(function () {
+        $(this).closest("dl").find("dd input:checkbox").prop("checked", $(this).prop("checked"));
+      });
+      $(".permission-list2 dd input:checkbox").click(function () {
+        if ($(this).prop("checked")) {
+          $(this).closest("dl").find("dt input:checkbox").prop("checked", true);
+          $(this).parents(".permission-list").find("dt").first().find("input:checkbox").prop("checked", true);
+        } 
+      });
+    });
+    
+    
+    function submitform() {
+        $.ajax({
+          type: 'post',
+          data: $("#form-admin-role-add").serialize(),
+          url: "{:url('admin/role/allotperm')}",
+          success: function (data) {
+            if(data==1){
+              layer.msg('操作成功!', {icon: 1, time: 1000});
+              setTimeout(function(){
+              var index = parent.layer.getFrameIndex(window.name);
+              parent.$('.btn-refresh').click();
+              parent.layer.close(index);},1500);
+            }else{
+              layer.msg('无效操作!', {icon: 2, time: 1000});
+              setTimeout(function(){
+              var index = parent.layer.getFrameIndex(window.name);
+              parent.$('.btn-refresh').click();
+              parent.layer.close(index);},1500);
+            }
+          },
+          error: function (XmlHttpRequest, textStatus, errorThrown) {
+            layer.msg('error!', {icon: 1, time: 1000});
+          }
+        });
+   }
+    
+  </script>
+  <!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

@@ -1,0 +1,28 @@
+{include file='index/meta' /}
+
+</head>
+<body>
+
+  <div class="welcom">
+    <ul>
+      <li>昨天有<font color="gray">{$orders["TotalOrders"]}</font>报单</p><p>已处理<font color="green">{$orders["DoOrders"]}</font>单，</p><p><font color="red">{$orders["NotDoOrders"]}</font>单没处理</p></li>
+      <li><p>昨天后台注册了{$agents["PutInAgents"]}人</p></li>
+      <li><p>有{$cars["PutInCars"]}直通车报单申请</p></li>
+     
+      <li><p>有<font color="red">{$sorts["nosort"]}</font>单没有排序</p></li>
+      <li><p>应该发{$finance["total"]["totalmoney"]}奖金，</p> <p>实际发了{$finance["send"]["sendmoney"]}奖金，</p><p> 还需要发{$finance["total"]["totalmoney"]-$finance["send"]["sendmoney"]}奖金</p></li>
+    </ul>
+
+
+
+  </div>
+
+
+  {include file='index/footer' /}
+  
+  
+  <script type="text/javascript">
+  
+  </script>
+</body>
+</html>

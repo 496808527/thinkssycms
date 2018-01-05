@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {include file='index/header' /}
+    <link rel="stylesheet" href="__WAP__/css/main.css" />
+    <script type="text/javascript" src="__WAP__/js/rem.js" ></script>
+  </head>
+  <body>
+    <div class="header">{$name}</div>
+
+    <div class="personmenu">
+      <ul>
+        <li topage="{:url('index/upfile',['savepath'=>'excel'])}">上传奖金与直通车对账单<span></span></li>
+        <li topage="{:url('orders/myinfo')}">个人信息<span></span></li> 
+        <li topage="{:url('orders/orderscenter')}">我的报单<span></span></li>
+<!--        <li topage="{:url('orders/baselist')}">代理推荐<span></span></li>        -->
+        <li topage="{:url('orders/recomelist')}">我的推荐<span></span></li>
+          <li topage="{:url('orders/bonuslist')}">奖金记录<span></span></li>
+        <li topage="{:url('orders/myperformance')}" class="border-none">我的业绩<span></span></li> 
+        
+      </ul>
+      
+    </div>
+
+    <div class="footer">
+        <ul>
+          <li>
+            <a href="{:url('orders/index')}">我要报单</a>
+          </li>
+          <li class="active">
+              <a href="{:url('orders/personcenter')}">个人中心</a>
+          </li>
+        </ul>
+      </div>
+
+    <script src="__JS__/jquery.min.js"></script>
+    <script src="__WAP__/js/orders.js"></script>
+   
+    
+  </body>
+</html>

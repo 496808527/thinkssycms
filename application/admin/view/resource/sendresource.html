@@ -1,0 +1,91 @@
+{include file='index/meta' /}
+
+</head>
+<body>
+<article class="page-container">
+  <form class="form form-horizontal" id="form-admin-add" autocomplete="off" >
+    
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span> 资源类型：</label>
+        <div class="formControls col-xs-8 col-sm-8">
+          <select class="input-text" name="filetype">
+            {foreach name="typelist" item="type"}
+            <option value="{$key}">{$type}</option>
+            {/foreach}
+          </select>
+        </div>
+      </div>
+      
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span> 上传文件：</label>
+        <div class="formControls col-xs-8 col-sm-8">
+          <input type="input" class="input-text"  name="filepath" id="excelmodel"
+                 onclick="admin_role_add('上传资源文件','{:url("util/Simpleupload/index",['t'=>rand(),"con"=>"excelmodel"])}',420,360)"
+                 readonly="readonly"/>
+        </div>
+      </div>
+      
+    
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-3">文件描述：</label>
+        <div class="formControls col-xs-8 col-sm-8">
+          <textarea name="filedescribe" cols="" rows="" class="textarea"  placeholder="说点什么...100个字符以内" dragonfly="true" onKeyUp="TextLen()"></textarea>
+          <p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+        </div>
+      </div>
+      
+      
+      <div class="row cl">
+        <div class="col-xs-8 col-sm-8 col-xs-offset-4 col-sm-offset-3">
+          <input class="btn btn-primary radius" type="button" onclick="submitform()" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+        </div>
+      </div>
+    </form>
+</article>
+  
+  
+{include file='index/footer' /}
+
+
+ 
+  <script type="text/javascript">
+    
+     function admin_role_add(title, url, w, h){
+       layer_show(title,url,w,h);
+    }
+    
+    function TextLen() {
+      $(".textarea").Huitextarealength({
+        minlength: 10,
+        maxlength: 100.
+      });
+    }
+    function submitform() {
+      formdata=$("#form-admin-add").serialize();
+      $.ajax({
+        type: 'post',
+        data: formdata,
+        url: "{:url('admin/resource/sendresource')}",
+        success: function (data) {
+          if(data==1){
+            layer.msg('操作成功!', {icon: 1, time: 1000});
+            setTimeout(function(){
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.$('.btn-refresh').click();
+            parent.layer.close(index);},1500);
+          }else{
+            layer.msg(data, {icon: 2, time: 1000});
+          }
+
+        },
+        error: function (XmlHttpRequest, textStatus, errorThrown) {
+          layer.msg('error!', {icon: 1, time: 1000});
+        }
+      });
+    }
+
+
+  </script> 
+  <!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

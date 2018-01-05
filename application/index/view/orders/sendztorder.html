@@ -1,0 +1,188 @@
+
+
+<input type="hidden" id="uploadid" name="uploadid" value="{$uploadid}">
+
+
+
+<form id="myform" onsubmit="return false;">
+  <input type="hidden"  value="{$ztid}" name="ztid">
+  <input type="hidden"  value="{$type}" name="resulttype">
+  <input type="hidden" value="0"  name="futoutype">
+  <ul>
+    {neq name="type" value="1"}
+    <li class="futou"> 
+      <span data-ftid="1">复投一单</span>  
+      <span data-ftid="2">复投两单</span>
+      {eq name="type" value="3"}  <span data-ftid="3">复投三单单</span>{/eq}</li>
+    <li>
+      <select name="platform" data-msg="请选择积分平台！">
+        <option value="">请选择积分平台</option>
+        <option value="1">云联惠</option>
+        <option value="2">其他</option>
+      </select>
+    </li>
+    <li>
+      <input type="text" placeholder="请输入积分账号"  data-msg="请填写正确的积分账号！" name="pointid">
+    </li>
+    <li>
+      <input type="text" placeholder="请输入积分手机"   exp="^1[3,4,5,7,8,9]\d{9}$" data-msg="请填写正确的返还积分手机号码！" name="pointtel" >
+    </li>
+    <li>
+      <input type="text" placeholder="请输入积分数量"  data-msg="请输入积分数量！"  name="pointaccount">
+    </li>
+
+    {/neq}
+
+    {neq name="type" value="2"}
+    <li>
+      <span>请上传凭证</span>
+      <input type="file" placeholder="请上传凭证" id="uploadremit" style="left: 1.2rem;">
+    </li>
+    <li>
+      <div class="uploadfiles">
+        <ul>
+        </ul>
+      </div>
+    </li>
+    {/neq}
+    <li>
+      <button class="btn">添加</button>
+      <button class="cancel">取消</button>
+    </li>
+  </ul>
+</form>
+
+<script>
+   
+
+  $("#uploadremit").change(function () {
+    var file = this.files[0];
+    name = file.name;
+    if (!name) {
+      $("#tips").text("请选择文件").show();
+      return false;
+    }
+    size = file.size;
+    type = file.type;
+    url = window.URL.createObjectURL(file); //获取本地文件的url，如果是图片文件，可用于预览图片
+    form = document.getElementById("myform");
+    sendurl = "{:url('util/simpleupload/upload')}";
+    savepath = "{$savepath}";
+    uploadid = $("#uploadid").val();
+    filedata = {file: file, name: name, size: size, type: type, fileurl: url, form: form, sendurl: sendurl, uploadid: uploadid, savepath: savepath}
+    simple = new SimpleUpload(filedata);
+    simple.Upload(simple);
+  })
+
+  $(".btn").click(function () {
+    var state = true;
+    $("#myform select").each(function () {
+      var tempval = $(this).val();
+      var datemsg = $(this).attr("data-msg");
+      if (!tempval) {
+        $(".tips").html(datemsg).show();
+        state = false;
+        setTimeout(function () {
+          $(".tips").hide();
+        }, 1000);
+        return false;
+      }
+    });
+    $("#myform input[type='text']").each(function () {
+      var tempval = $(this).val();
+      var datemsg = $(this).attr("data-msg");
+      if (!tempval) {
+        layer.msg(datemsg);
+        state = false;
+        return false;
+      }
+      if ($(this)[0].hasAttribute("exp")) {
+        reg = eval("/" + $(this).attr("exp") + "/");
+        if (!reg.test(tempval)) {
+          layer.msg(datemsg);
+          state = false;
+          return false;
+        }
+      }
+    });
+    
+    if(state){
+      
+      {neq name="type" value="2"}
+      a= $(".uploadfiles").find("input[type='hidden']");
+      if(a.length===0){
+        layer.msg("请上传支付凭证");
+        state = false;
+        return false;       
+      }
+      {/neq}
+      var b=$("input[name='pointaccount']").val();
+      var aa=parseInt( b);
+
+      if(aa%10000!==0&&typeof(b)!=="undefined"){
+         layer.msg("请输入1W元的整数倍金额");
+          state = false;
+          return false;
+      }
+      var url="{:url('sendztorder')}";
+      var postdata=$("#myform").serialize();
+      $.post(url,postdata,function(data){
+        if(data.state==="ok"){
+          layer.msg(data.msg);
+          {eq name="type" value="1"}
+            setTimeout(function(){
+              window.location.reload();
+            },1000);
+          {/eq}
+            
+          {neq name="type" value="1"}            
+            $(".btn").text("继续添加");
+            $("#myform input[type='text']").val("");
+          {/neq}
+        }else{
+          layer.msg(data.msg);
+        }
+      });
+    }
+
+
+  });
+
+  $(".cancel").click(function () {
+    $("input[name='ztid']").val("");
+    $(".ztform").hide();
+    window.location.reload();
+  });
+  
+  
+  $(".futou span").each(function(index){
+    var len = $(".futou span").length;
+    var wth=.9/len*100;
+    var ml =.1/(len+1)*100;
+    var background="";
+    if(index==1){
+        background="#0099CC";
+    }else if(index==2){
+        background="red";
+    }
+    var cssdata={width:wth+"%","margin-left":ml+"%"};
+    if(background!==""){
+      cssdata.background=background;
+    }
+    $(this).css(cssdata);
+  });
+
+    $(".futou span").click(function(){
+      $(this).addClass("active").siblings().removeClass("active");
+     
+      var resulttype=parseInt($("input[name='resulttype']").val());
+      var futoutype=parseInt($(this).attr("data-ftid"));
+  
+      var totalpoint=(resulttype==3)?350000:250000;
+      var temppoint =totalpoint-futoutype*100000;
+      layer.msg("还可以可以领到"+temppoint+"积分");
+      $("input[name='futoutype']").val(futoutype);
+    });
+
+
+</script>

@@ -1,0 +1,140 @@
+{include file='index/meta' /}
+
+<title>{$title}</title>
+</head>
+<body>
+  <nav class="breadcrumb">
+
+    {notempty name="menustr"}
+    {$menustr}
+    {/notempty}
+
+
+    <a class="btn btn-success btn-refresh radius r" style="line-height:1.6em;margin-top:3px" href="javascript:;" title="刷新" >
+      <i class="Hui-iconfont">&#xe68f;</i></a>
+  </nav>
+
+  <div class="page-container">
+    <form>
+      <div class="text-c">
+        <input type="text" class="input-text" style="width:250px" placeholder="请输入代理商编号或者姓名" id="" name="agentno" value="{$agentno}">
+
+        <input type="text" onfocus="WdatePicker()" id="logmin" placeholder="入账开始时间" class="input-text Wdate" style="width:120px;" name='begintime' value="{$begintime}">
+        -
+        <input type="text" onfocus="WdatePicker()" id="logmax"  placeholder="入账结束时间" class="input-text Wdate" style="width:120px;" name="endtime" value="{$endtime}">
+
+        <button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+      </div>
+    </form>
+    {notempty name="actions.PanelAction"}
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+      {foreach name='actions.PanelAction' item='item'}
+      <span class="l"> 
+        <a class="btn btn-primary radius" href="javascript:admin_role_add('{$item['permname']}','{:url($item['permurl'],array('tagrole'=>$item['id']))}')" >
+          <i class="Hui-iconfont">{$item["permcss"]? $item["permcss"]:"&#xe600;"}</i>
+          {$item['permname']}
+        </a> </span>
+      {/foreach}
+    </div>
+    {/notempty}
+    <table class="table table-border table-bordered table-bg mt-20">
+      <thead>
+        <tr>
+          <th scope="col" colspan="14">代理商报单预出彩列表</th>
+        </tr>
+        <tr class="text-c">
+          <th width="50">排单编号</th>
+          <th width="50">入单人</th>
+          <th width="60">推荐人</th>
+          <th width="100">代理区域</th>
+          <th width="50">汇款人</th>
+          <th width="100">入账时间</th>
+          <th width="120">入单人身份证</th>
+          <th width="80">入单人手机</th>
+          <th width="50">积分平台</th>
+          <th width="50">返积分ID</th>
+          <th width="80">返积分手机号</th>
+          <th width="50">代理商</th>
+          <th width="50">汇款金额</th>
+          <th width="80">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        {notempty name="list"}
+        {foreach name='list' item='order'}
+        <tr class="text-c data-item" data-img="{$order.remitimg}" data-id="{$order.id}" data-state="{$order.state}">
+          <td >{$order.sortid}</td>
+          <td >{$order.remituser}</td>
+          <td >{$order.recomeuser}</td>
+          <td >{$order.agentarea}</td>
+          <td >{$order.bankuser}</td>
+          <td ><span class="entrytime_{$order.id}">{$order.entrytime}</span></td>
+          <td >{$order.remitidcard}</td>
+          <td >{$order.remittel}</td>
+          <td >{notempty name="order.platform"}{$platform[$order.platform]}{/notempty}</td>
+          <td>{$order.platformid}</td>
+          <td >{$order.platformtel}</td>
+          <td >{$order.agentname}</td>
+          <td >{$order.remitaccount}</td>  
+          <td>
+            {eq name="order.issend" value="0"}
+            <a title="预出彩" href="javascript:;"  form-data="{$order.state}"   onclick="admin_role_del('{$order.id}')" class="ml-5" style="text-decoration:none">
+              <i class="Hui-iconfont">&#xe6e1;</i>
+            </a> 
+            {else}
+            已预出彩  
+            {/eq}
+          </td>
+        </tr>
+        {/foreach}
+        {else}
+        <tr class="text-c"><td colspan="14">暂无数据</td></tr>
+        {/notempty}
+      </tbody>
+    </table>
+  </div>
+
+  {$page}
+
+
+
+  {include file='index/footer' /}
+  <script type="text/javascript" src="__ADMIN__/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+  <script  type="text/javascript">
+
+                $(".btn-refresh").click(function () {
+                  location.replace(location.href)
+                });
+
+                function admin_role_del(id) {
+                  confirmstr = "报单出彩须谨慎，确认要出彩吗？";
+                  layer.confirm(confirmstr, function (index) {
+                    //此处请求后台程序，下方是成功后的前台处理
+                    $.ajax({
+                      type: 'post',
+                      data: "id=" + id,
+                      url: "{:url('admin/orders/dosendorder')}",
+                      success: function (data) {
+                        if (data.state == "ok") {
+                          layer.msg(data.msg, {icon: 1, time: 1000});
+                          setTimeout(function () {
+                            $('.btn-refresh').click();
+                          }, 1500);
+                        } else {
+                          layer.msg(data.msg, {icon: 1, time: 1000});
+                        }
+                      },
+                      error: function (XmlHttpRequest, textStatus, errorThrown) {
+                        layer.msg('error!', {icon: 1, time: 1000});
+                      }
+                    });
+                    //$(obj).closest("tr").remove(); //找到第一个父元素并且删除
+                    //layer.msg('已删除!', {icon: 1, time: 1000});
+                  });
+                }
+
+  </script>
+
+</body>
+</html>

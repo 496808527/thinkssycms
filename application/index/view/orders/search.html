@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {include file='index/header' /}
+
+    <link rel="stylesheet" href="__WAP__/css/main.css" />
+    <script type="text/javascript" src="__WAP__/js/rem.js" ></script>
+  </head>
+
+  <body>
+    <div class="header">
+      <i></i>{$name}<b></b>
+      <div class="search">
+        <input type="text" name="keyword" placeholder="请输入入单人或者汇款人">
+      </div>
+    </div>
+
+
+
+
+    <div class="orderlist">
+      <div class="content">
+
+      </div>
+    </div>
+
+
+
+    <script src="__JS__/jquery.min.js"></script>
+    <script type="text/javascript" src="__ADMIN__/lib/layer/2.4/layer.js"></script>
+    <script src="__WAP__/js/orders.js"></script>
+    <script src="__WAP__/js/dropload.min.js"></script>
+    <script>
+      var num = 0;
+      var total = 0;
+      var pageStart = 0;
+
+      $("input").keypress(function (e) {
+        var keyword = $(".search input[name='keyword']").val();
+        if (e.keyCode === 13) {
+          if (!keyword) {
+            return false;
+          }
+          $('.orderlist>.content').html("");
+          $(".orderlist .dropload-down").remove();
+          // dropload
+          var dropload = $('.orderlist').dropload({
+            scrollArea: window,
+            loadDownFn: function (me) {
+              $.ajax({
+                type: 'post',
+                url: "{:url('orders/search')}?page=" + (pageStart + 1) + "&keyword=" + keyword,
+                dataType: 'json',
+                success: function (data) {
+                  if(data.data.length===0){
+                    dropload.lock();
+                    dropload.noData();
+                  }else{
+                    total=data.total;
+                    num=data.per_page;
+                    var result = '';
+                    for (var i = 0; i < data.data.length; i++) {
+                      order = data.data[i];
+                     sortid = (order.isshow === 0) ? "等待排单" : order.sortid;
+                         sortid = (sortid==null)?"等待排单":sortid;
+                       if(order.issend==0){
+                          issend="未出彩";
+                        }else if(order.issend==1){
+                          issend="预出彩";
+                        }else if(order.issend==2){
+                          issend="已出彩";
+                        }else{
+                          issend="待确认";
+                        };
+                        
+                      if(order.state==1){
+                        state="<font color='green'>已审核</font>";
+                      }else if(order.state==0){
+                        state="<font color='#999999'>待审核</font>";
+                      }else{
+                        state="<font color='red'>已驳回</font>";
+                      }
+                      entrytime=(order.entrytime==null)?"待确认":order.entrytime;
+                      result += '<ul><li>排单编号：' + sortid + '</li><li>是否出彩：' + issend + '</li>';
+                      result += '<li> 入单人：' + order.remituser + ' </li><li> 报单日期：' + order.putintime + ' </li>';
+                      result += '<li> 汇款人：' + order.bankuser + ' </li>';
+                      result += '<li> 入账时间：' + entrytime + ' </li>';
+                      result += '<li> 审核状态：' +  state+ ' </li>';
+                      result += '<li> 入单人身份证：' + order.remitidcard + '</li></ul>';
+                    }
+                    if (data.current_page == Math.ceil(total / num) || total == 0) {
+                      dropload.lock();
+                      dropload.noData();
+                    } else {
+                      pageStart = parseInt(data.current_page);
+                      dropload.unlock();
+                      dropload.noData(false);
+                    }
+                    $('.orderlist>.content').append(result);
+                  }
+                  
+                  dropload.resetload();
+                }
+              });
+            }
+          });
+        }
+      });
+
+
+    </script>
+  </body>
+</html>

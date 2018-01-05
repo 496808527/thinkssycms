@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{include file='index/header' /}
+		<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.css"/>
+		<link rel="stylesheet" type="text/css" href="__CSS__/index.css"/>
+		<script src="__JS__/jquery.min.js"></script>
+		<script src="__JS__/bootstrap.js"></script>
+	</head>
+	<body>
+		<div class="container">  
+	        <div class="form">  
+	            <img class="logo" src="__IMG__/123.png"/> 
+	            <form class="form-horizontal col-sm-offset-3 col-md-offset-2" id="login_form">  
+	                <div class="col-sm-9 col-md-9">  
+	                    <div class="form-group">  
+	                        <i class="fa fa-user fa-lg"></i>  
+	                        <input class="form-control required" type="text" placeholder="手机号码" name="username" autofocus="autofocus" maxlength="20"/>  
+	                    </div>  
+	                    <div class="form-group">  
+	                            <i class="fa fa-lock fa-lg"></i>  
+	                            <input class="form-control required" type="password" placeholder="密码" name="password"/>  
+	                    </div>  
+	                    <div class="form-group">  
+                          <input type="button" class="btn btn-success login" value="登 录"/>  
+                           <input type="hidden" name="__token__" value="{$Request.token}" />
+	                    </div>  
+<!--                      <div class="form-group link-reg" >  
+                        <a href="{:url('reg')}">——————注&nbsp;&nbsp;册——————</a>
+                      </div>-->
+                      
+                      <div class="form-group link-reg" >  
+                        <a href="{:url('findpwd')}">——————忘记密码——————</a>
+                      </div>
+                      
+	                </div>  
+	            </form>  
+	        </div>  
+        </div>  
+      <script type="text/javascript" src="__ADMIN__/lib/layer/2.4/layer.js"></script>
+      <script>
+        $(".login").click(function(){
+          url="{:url('index')}";
+          postdata=$("#login_form").serialize();
+          $.post(url,postdata,function(data){
+            if(data.state=="err"){
+              layer.msg(data.msg);
+            }else{
+              layer.msg(data.msg);
+              setTimeout(function(){
+                window.location.href=data.tourl;
+              },2000);
+            }
+          })
+        })
+        
+      </script>
+	</body>
+</html>

@@ -1,0 +1,55 @@
+.after:after {
+  display: block;
+  content: "";
+  clear: both; }
+
+html {
+  height: 100%; }
+html body {
+  height: 100%;
+  margin: 0; }
+html body .container .form {
+  width: 100%; }
+
+html body a{
+  text-decoration: none !important;
+}
+html body .container .form .logo {
+  width: 150px;
+  height: 150px;
+  margin: 50px auto 20px;
+  display: block; }
+html body .container .form .form-horizontal {
+  width: 100%; }
+html body .container .form .form-horizontal .col-sm-9 {
+  margin: 0 20px; }
+html body .container .form .form-horizontal .col-sm-9 .form-group {
+  text-align: center;
+  line-height: 34px; }
+html body .container .form .form-horizontal .col-sm-9 .form-group .form-control {
+  width: 80%;
+  margin: 0 auto; }
+html body .container .form .form-horizontal .col-sm-9 .form-group .btn {
+  width: 80%;
+  margin: 0 auto; }
+
+#login_form .form-group span{
+  position: absolute;
+  height: 41px;
+  line-height: 41px;
+  background: #5cb85c;
+  color: #FFF;
+  right: 30px;
+  border-radius: 4px;
+  top: 0px;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+}
+
+#login_form .form-group span:focus{
+  border: #000 1px solid;
+  
+}
+
+
+
+/*# sourceMappingURL=index.css.map */

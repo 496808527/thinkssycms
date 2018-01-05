@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {include file='index/header' /}
+    <link rel="stylesheet" href="__WAP__/css/main.css" />
+    <script type="text/javascript" src="__WAP__/js/rem.js" ></script>
+  </head>
+
+  <body>
+    <div class="header"><i></i>{$name}</div>
+    
+    
+    <div class="ordersform">
+      <div class="warning">
+        <ul> 
+          <li>1.新的银行卡的户主名必须和原银行卡的户主名一致</li> 
+          <li>2.新的银行卡必须是建设银行卡</li> 
+          <li>3.每个人仅限制修改一次银行卡，如果需要再次修改，请联系后台客服</li> 
+        </ul>
+      </div>
+        <form id="ordersform">
+          <p><span>持卡人姓名：</span><input name="bankowner" type='text' value="{$Think.session.userinfo.agentname}"  data-msg="请填写正确的持卡人姓名！"></p>
+          <p><span>银行类型：</span>建设银行</p>
+          <p><span>登录手机：</span><input name="username" type='text'  data-msg="请输入注册手机！" ></p>
+          <p><span>验证码：</span><input name="code" type='text' data-msg="验证码不能为空！" style="width: 2.5rem;"><b style="margin-left: 0.3rem;">获取验证码</b></p>
+       
+          <p><span>新银行卡：</span><input name="newbank" type='text'  data-msg="请填写正确的新银行卡信息！"></p>
+          <p><span>支行地址：</span><input name="bankinfo" type='text'  data-msg="请填写正确的支行信息！"></p>
+          <p class="border-none"><input class="btn_ok" type="button" value="确定"></p>
+        </form>
+    </div>
+     
+     <script src="__JS__/jquery.min.js"></script>
+     <script type="text/javascript" src="__ADMIN__/lib/layer/2.4/layer.js"></script>
+     
+    <script>
+      
+      $(".header i").click(function () {
+        window.history.go(-1);
+      });
+      
+      $("#ordersform").on("click","b",function(){
+          var url="{:url('index/getmobilecode')}";
+          var phone=$("input[name='username']").val();
+          var phonetest=/^1[3,4,5,7,8,9]\d{9}$/;
+          if(!phonetest.test(phone)){
+            layer.msg("请输入正确的手机号码");
+            return false;
+          }
+          var postdata={tel:phone};
+          $.post(url,postdata,function(data){
+            layer.msg(data.msg);
+          });
+      });
+      
+      $(".btn_ok").click(function(){
+        $("#ordersform input[type='text']").each(function(){
+          var datamsg = $(this).attr("data-msg");
+          var tempval=$(this).val();
+          if(!tempval){
+            layer.msg(datamsg);
+            return false;
+          }
+          var newbank = $("input[name='newbank']").val();
+          if(isNaN(newbank)){
+            layer.msg(datamsg);
+            return false;
+          }
+        });
+        var postdata=$("#ordersform").serialize();
+        var url="{:url('updatebank')}";
+        $.post(url,postdata,function(data){
+          layer.msg(data.msg);
+        });
+        
+      });
+      
+    </script>
+  </body>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</html>

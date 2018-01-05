@@ -1,0 +1,380 @@
+@charset "utf-8";
+/* 你自己的样式 */
+
+/*welcom*/
+.welcom {
+  margin-top: 200px;
+  width: 100%;
+}
+
+.welcom ul{
+  margin-left:5%;
+  width: 90%;
+}
+
+.welcom ul li{
+  margin-top: 10px;
+  margin-left: 10px;
+  float: left;
+  width: 24%;
+  text-align: center;
+  border: 1px solid #5a98de;
+  height: 200px;
+}
+
+.welcom ul li p{
+  height: 32px;
+  line-height: 32px;
+}
+
+
+.pagination{padding: 20px;}
+
+.pagination li{float: left}
+
+.pagination li>span,.pagination li>a{   
+  border: 1px solid #ccc;
+  cursor: pointer;
+  display: inline-block;
+  margin-left: 2px;
+  text-align: center;
+  text-decoration: none;
+  color: #666;
+  height: 26px;
+  line-height: 26px;
+  text-decoration: none;
+  margin: 0 0 6px 6px;
+  padding: 0 10px;
+  font-size: 14px;
+}
+.pagination .active>span{
+  background: #5a98de;
+  color: #fff;
+}
+
+.border_none{
+  border: none !important;
+}
+
+.voucher{
+  position: fixed;
+  width: 28%;
+  top: 40px ;
+  right:   0;
+  height:100%;
+  background: #F0F0EE;
+  box-shadow:0px 0px 8px #000;
+  display: none;
+
+} 
+
+.voucher h4{
+  background: #5eb95e;
+  color: #FFF;
+  text-align: center;
+  margin-top: 0px;
+  font-size: 16px;
+}
+
+.voucher ul{
+  margin-left: 4%;
+  height: 400px;
+  width: 90%;
+  overflow-y: scroll;
+  float: left;
+}
+
+.voucher ul li{
+  width: 100%;
+  float: left;
+}
+
+.voucher ul li img{
+  width: 100%;
+}
+
+.voucher p.item{
+  margin-top: 10px;
+  display: inline-block;
+  float: left;
+  position: relative;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  width: 100%;
+}
+
+.voucher p{
+  position: absolute;
+  height: 40px;
+  line-height: 40px;
+  bottom: 30px;
+  text-align: center;
+  width: 100%;
+}
+
+.voucher p .btn{
+  width: 30%; 
+}
+
+.voucher .itemcontent{
+  float: left;
+  margin-top: 40px;
+  width: 100%;
+}
+
+.voucher .itemcontent p.item{
+  position:  relative;
+  height: 34px;
+  line-height: 34px;
+  width: 100%;
+}
+
+.voucher .itemcontent p.item input{
+  width: 90%;
+  margin-left: 2%;
+}
+.orderlist{
+  width: 100%;
+  float: left;
+  border-bottom: #CCC solid 1px;
+  margin-top: 10px;
+}
+ul.orderlist li{
+  width: 50%;
+  line-height: 32px;
+  height: 32px;
+  float: left;
+}
+ul.orderlist li:nth-of-type(odd){
+  width: 40%;
+  margin-left: 10%;
+}
+ul.orderlist li:nth-of-type(odd) span{
+  display: inline-block;
+  width: 130px;
+
+}
+.orderaction{
+  width: 100%;
+  height: 32px;
+  text-align: center;
+  margin-top: 12px;
+  float: left;
+
+}
+.orderaction .btn{
+  width: 200px;
+}
+
+/*打印*/
+
+.printorder{
+  float: left;
+  width: 780px;
+
+  margin-left: 20px;
+}
+
+.printorder img{
+  float: left;
+  margin-left: 90px;
+  width: 50px;
+  margin-top:16px; 
+}
+
+.printorder .header{
+  float: left;
+  width:400px;
+  text-align: center;
+}
+
+
+.printorder .header h4{
+  line-height: 34px;
+  height: 34px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.printorder .header h3{
+  padding-top:  0px;
+  margin-bottom: 0px;
+  text-decoration: underline;
+}
+
+.printorder .header h3 span{
+  padding: 0 0 8 0;
+  border-bottom: 2px solid #000;
+}
+
+.printorder .number1{
+  float: left;
+  width: 240px;
+}
+
+.printorder .content1{
+  clear: both;
+  float: left;
+  width: 730px;
+  border:  1px solid #000;
+  padding-bottom: 15px;
+  margin-top: 10px;
+}
+
+.printorder .content1 ul{
+  width: 600px;
+  float: left;
+  margin-left: 50px;
+}
+
+.printorder .content1 ul li {
+  margin-top: 5px;
+  float:left;
+  width: 100%;
+  line-height: 42px;
+  height: 42px;
+  border-bottom: 1px solid #000;
+  position: relative;
+
+}
+
+.printorder .content1 ul li input,.printorder .content1 ul li select, .printorder .content1 ul li #bankname{
+  position: absolute;
+  height: 26px;
+  line-height: 26px;
+  width: 180px;
+  border:none;
+  left: 90px;
+  top: 8px;
+  display: inline-block;
+  font-weight: normal;
+}
+
+.printorder .content1 ul li select{
+  left: 0px;
+  width: 600px;
+  opacity: 0;
+}
+
+.printbtndiv{
+  float: left;
+  margin-top: 20px;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  width: 100%;
+}
+
+.printorder .content1 ul li p{
+
+  display: inline-block;
+  text-indent: 2em;
+  width: 500px;
+}
+
+.printorder .content1 ul li:last-child{
+  border-bottom: none;
+}
+
+.printorder .content1 ul li span{
+  display: inline-block;
+  z-index: 10;
+  text-align: right;
+  border-bottom: 1px solid #000;
+  float: right;
+}
+
+.printorder .infoitem{
+  margin-left: 5px;
+  width: 20px;
+  float: left;
+  font-size: 10px;
+}
+
+.printorder ul.footer1{
+
+  float: left;
+}
+
+.printorder ul.footer1 li{
+  float: left;
+  width:   140px;
+}
+
+.memberinfo{
+  position: absolute;width: 94%; 
+  min-height:  200px;
+}
+
+#ordermember{
+  text-align: left;
+  background: #F7F7F7;
+  color: #002a80;
+  width: 480px;
+  display: none;
+  z-index: 999;
+  overflow-y: auto;
+  height: 200px;
+}
+
+.memberinfo ul ,.memberinfo ul li{
+  width: 100%;
+  float:  left;
+}
+
+.memberinfo ul li {
+  line-height: 32px;
+  height: 32px;
+  font-size:  14px;
+  border-bottom: 1px solid #ccc;
+}
+
+.warning{
+  color: #F00;
+  background: #FFF6D9;
+}
+
+.uploadorders {
+  clear: both;
+  float: left;
+  position: relative;
+  margin-top: 20px;
+  width: 100%;
+}
+.uploadorders p{
+  height:42px;
+  width: 100%;
+}
+.uploadorders p label{
+  width: 150px;
+  display: inline-block;
+}
+.uploadorders p input{
+  width: 500px;
+}
+.uploadorders  .info{
+  float: left;
+  width: 400px;
+  border: 1px dashed #F00;
+}
+
+/*查询*/
+
+.width-188{
+  width:  188px;
+}
+
+.width-222{
+  width: 222px;
+}
+
+
+.search{
+  width: 100%;
+}
+
+.search ul ,.search ul li{
+  width: 100%;
+
+}

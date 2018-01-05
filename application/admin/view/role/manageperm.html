@@ -1,0 +1,158 @@
+{include file='index/meta' /}
+
+</head>
+<body>
+  <article class="page-container">
+    <form class="form form-horizontal" id="form-admin-add">
+      <input type="hidden" value="{$info['id']}" name="id">
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>父级权限：</label>
+        <div class="formControls col-xs-8 col-sm-8">
+          <span class="select-box" >
+            <select class="select" size="1" name="parentid">
+              <option value="0" selected>根目录</option>
+              {$tree}
+            </select>
+          </span> 
+        </div>
+      </div>
+
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>操作类型：</label>
+        <div class="formControls col-xs-8 col-sm-8">
+          <span class="select-box" >
+            <select class="select" size="1" name="level">
+              <option value="" selected>选择操作类型</option>
+              {volist name="action_perm" id="action" }
+              <option value="{$key}" {eq name="key" value="$info['level']"}selected{/eq}  >{$action}</option>
+              {/volist}
+            </select>
+          </span> 
+        </div>
+      </div>
+      
+      <div class="row cl actiontype {$info['level']=='2'?'':'hidden'}">
+        <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>操作类别：</label>
+        <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+          <div class="radio-box">
+            <input name="actiontype" type="radio" id="actiontype-1" value="1" {$info["actiontype"]=='1'?"checked":''}>
+            <label for="actiontype-1">面板操作</label>
+          </div>
+          <div class="radio-box">
+            <input name="actiontype" type="radio" id="actiontype-2" value="2" {$info["actiontype"]=='2'?'checked':''}>
+            <label for="actiontype-2">行内操作</label>
+          </div>
+        </div>
+      </div>
+      
+      
+
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>权限名称：</label>
+        <div class="formControls col-xs-8 col-sm-8">
+          <input type="text" class="input-text" autocomplete="off" value="{$info['permname']}" placeholder="权限名称" name="permname">
+        </div>
+      </div>
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>管理URL：</label>
+        <div class="formControls col-xs-8 col-sm-8">
+          <input type="text" class="input-text" autocomplete="off" value="{$info['permurl']}"  placeholder="管理URL"  name="permurl">
+        </div>
+      </div>
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>前端CSS：</label>
+        <div class="formControls col-xs-8 col-sm-8">
+          <input type="text" class="input-text" autocomplete="off" value="{$info['permcss']}"  placeholder="前端CSS"  name="permcss">
+        </div>
+      </div>
+
+
+      <div class="row cl ">
+        <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>状态：</label>
+        <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+          <div class="radio-box">
+            <input name="status" type="radio" id="sex-1" value="0" {$info["status"]?'':"checked"}>
+            <label for="sex-1">禁用</label>
+          </div>
+          <div class="radio-box">
+            <input type="radio" id="sex-2" name="status" value="1" {$info["status"]?'checked':""}>
+            <label for="sex-2">启用</label>
+          </div>
+        </div>
+      </div>  
+
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-3">功能描述：</label>
+        <div class="formControls col-xs-8 col-sm-8">
+          <textarea name="remark" cols="" rows="" class="textarea"  placeholder="说点什么...100个字符以内" dragonfly="true" onKeyUp="TextLen()">{$info["remark"]}</textarea>
+          <p class="textarea-numberbar"><em class="textarea-length">{$info["remark"]|mb_strlen=###,'utf-8'}</em>/100</p>
+        </div>
+      </div>
+      <div class="row cl">
+        <div class="col-xs-8 col-sm-8 col-xs-offset-4 col-sm-offset-3">
+          <input class="btn btn-primary radius" type="button" onclick="submitform()" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+        </div>
+      </div>
+    </form>
+  </article>
+
+  {include file='index/footer' /}
+
+  <!--请在下方写此页面业务相关的脚本-->
+  <script type="text/javascript" src="__ADMIN__/lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+  <script type="text/javascript" src="__ADMIN__/lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+  <script type="text/javascript" src="__ADMIN__/lib/jquery.validation/1.14.0/messages_zh.js"></script> 
+  <script type="text/javascript">
+            $(function () {
+              $('.skin-minimal input').iCheck({
+                checkboxClass: 'icheckbox-blue',
+                radioClass: 'iradio-blue',
+                increaseArea: '20%'
+              });
+            });
+
+            function TextLen() {
+              $(".textarea").Huitextarealength({
+                minlength: 10,
+                maxlength: 100.
+              });
+            }
+            
+            $("select[name='level']").change(function(){
+                actype = $(this).val();
+                if(actype=="2"){
+                  $(".actiontype").removeClass("hidden");
+                  $("input[name='actiontype']").removeAttr("disabled");
+                }else{
+                  $(".actiontype").addClass("hidden");
+                  $("input[name='actiontype']").attr("disabled","disabled");
+                }
+            })
+
+
+            function submitform() {
+              $.ajax({
+                type: 'post',
+                data: $("#form-admin-add").serialize(),
+                url: "{:url('admin/role/manageperm')}",
+                success: function (data) {
+                  if(data==1){
+                    layer.msg('操作成功!', {icon: 1, time: 1000});
+                    setTimeout(function(){
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.$('.btn-refresh').click();
+                    parent.layer.close(index);},1500);
+                  }
+                  
+                },
+                error: function (XmlHttpRequest, textStatus, errorThrown) {
+                  layer.msg('error!', {icon: 1, time: 1000});
+                }
+              });
+            }
+
+
+  </script> 
+  <!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

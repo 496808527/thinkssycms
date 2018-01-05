@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {include file='index/header' /}
+    <link rel="stylesheet" href="__WAP__/css/main.css" />
+    <script type="text/javascript" src="__WAP__/js/rem.js" ></script>
+  </head>
+
+  <body>
+    <div class="headerfindpwd"><i></i>{$name}<span>〓</span></div>
+    
+    <div class="menu" id="baselist">
+        <ul>
+          <li data-type="1"><span {eq name="datatype" value="1"} class="active" {/eq} >√</span>全部</li>
+          <li data-type="2"><span {eq name="datatype" value="2"} class="active" {/eq} >√</span>待处理</li>
+          <li data-type="4"><span {eq name="datatype" value="3"} class="active" {/eq} >√</span>已处理</li>
+          
+        </ul>
+   </div>
+
+    <!--     <div class="menu">
+          <ul>
+             <li topage="{:url('orders/personcenter')}">个人中心</li>
+            <li topage="{:url('orders/index')}">我要报单</li>
+            <li topage="{:url('orders/main')}">待审核的报单</li>
+            <li topage="{:url('orders/mainlist')}">已审核的报单</li>
+            <li topage="{:url('orders/refuselist')}">已拒绝的报单</li>
+            <li topage="{:url('orders/cars')}">直通车</li>
+             <li topage="{:url('orders/baseorder')}">我的底单</li>
+            <li topage="{:url('orders/baselist')}">代理底单</li>
+          </ul>
+        </div>-->
+
+    <div class="orderlist">
+      <div class="content">
+
+      </div>
+    </div>
+    
+    
+    <div class="ztform">
+      
+    </div>
+    
+     
+
+    <div class="zhezhao"></div>
+    <script src="__JS__/jquery.min.js"></script>
+    <script type="text/javascript" src="__ADMIN__/lib/layer/2.4/layer.js"></script>
+    <script src="__WAP__/js/orders.js"></script>
+    <script src="__WAP__/js/dropload.min.js"></script>
+    <script src="__WAP__/js/mobileupload.js"></script>
+    <script>
+
+      $(function () {
+        // 每页展示4个
+        var num = {$pageinfo.per_page};
+        var total = {$pageinfo.total};
+        var datatype={$datatype};
+        var pageStart = 0;
+        // dropload
+        var dropload = $('.orderlist').dropload({
+          scrollArea: window,
+          loadDownFn: function (me) {
+            // 加载菜单一的数据
+            $.ajax({
+              type: 'post',
+              url: "{:url('orders/cars')}?page=" + (pageStart + 1)+"&datatype="+datatype,
+              dataType: 'json',
+              success: function (data) {
+                var result = '';
+                for (var i = 0; i < data.data.length; i++) {
+                  order = data.data[i];
+                  if(order.state==0){
+                    state="待审核"
+                  }else if(order.state==1){
+                    state="已审核"
+                  }else if(order.state==2){
+                    state="已提交，待审核";
+                  }else{
+                     state ="积分分配未完成";
+                  }
+                 
+                  result += '<div class="list-li"><ul>';
+                  result += '<li> 序号：' + (i + 1) + ' </li><li> 处理状态：' + state + ' </li>';
+                  result += '<li> 申报日期：' + order.putintime + ' </li>';
+                  result += '</ul><div class="btn1" data-id="'+order.id+'">要车</div><div class="btn2" data-id="'+order.id
+                         +'">25W积分</div><div class="btn3" data-id="'+order.id+'">35W积分</div></div>';
+                }
+                if (data.current_page == Math.ceil(total / num) || total == 0) {
+                  dropload.lock();
+                  dropload.noData();
+                } else {
+                  pageStart = parseInt(data.current_page);
+                  dropload.unlock();
+                  dropload.noData(false);
+                }
+                $('.orderlist>.content').append(result);
+                dropload.resetload();
+              }
+            });
+          }
+        });
+      });
+      
+      $(".headerfindpwd i").click(function(){
+        window.location.href="{:url('orders/orderscenter')}";
+      });
+       
+      $("#baselist ul li").click(function(){
+            datatype=$(this).attr("data-type");
+            window.location.href="{:url('orders/cars')}?datatype="+datatype;
+        });
+        
+    {eq name="datatype" value="2"}
+      
+      $(".orderlist").on("touchend",".btn1",function(){
+          var ztid=$(this).attr("data-id");
+          var url="{:url('sendztorder')}?ztid="+ztid+"&type=1";
+          $.get(url,function(data){
+              $(".zhezhao").show();
+               $(".ztform").html(data);
+               $(".ztform").show();
+          });
+      });
+      
+      $(".orderlist").on("touchend",".btn2",function(){
+           var ztid=$(this).attr("data-id");
+          var url="{:url('sendztorder')}?ztid="+ztid+"&type=2";
+          $.get(url,function(data){
+              $(".zhezhao").show();
+               $(".ztform").html(data);
+                $(".ztform").show();
+          });
+      });
+      
+      $(".orderlist").on("touchend",".btn3",function(){
+            var ztid=$(this).attr("data-id");
+          var url="{:url('sendztorder')}?ztid="+ztid+"&type=3";
+          $.get(url,function(data){
+              $(".zhezhao").show();
+               $(".ztform").html(data);
+                $(".ztform").show();
+          });
+      });
+      
+      $(".orderlist>.content").on("touchstart", ".list-li", function (event) {
+       event.preventDefault();
+        var obj = event.target.parentNode.parentNode;
+        if (obj.className !== "list-li") {
+          return false;
+        }
+        initX = event.originalEvent.targetTouches[0].pageX;
+      });
+
+      $(".orderlist>.content").on("touchmove", ".list-li", function (event) {
+        event.preventDefault();
+        var obj = event.target.parentNode.parentNode;
+        if (obj.className !== "list-li") {
+          return false;
+        }
+       $(obj).siblings().css({"webkitTransform":"translateX(0)"});
+       var ztid=$("input[name='ztid']").val();
+       if(ztid){
+         return false;
+       }
+        endX = event.originalEvent.targetTouches[0].pageX;
+        x = endX - initX;
+        if (endX > initX) {
+          obj.style.webkitTransform = "translateX(0)"
+        } else {
+          obj.style.webkitTransform = "translateX(-4.2rem)"
+        }
+      });
+     
+  {/eq}
+
+
+    </script>
+  </body>
+</html>

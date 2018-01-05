@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {include file='index/header' /}
+    <link rel="stylesheet" href="__WAP__/css/main.css" />
+    <script type="text/javascript" src="__WAP__/js/rem.js" ></script>
+  </head>
+
+  <body>
+    <div class="headerfindpwd"><i></i>{$name}<span>〓</span></div>
+    
+    <div class="menu" id="baselist">
+        <ul>
+          <li data-type="1"><span {eq name="datatype" value="1"} class="active" {/eq} >√</span>全部</li>
+          <li data-type="2"><span {eq name="datatype" value="2"} class="active" {/eq} >√</span>预出彩</li>
+          <li data-type="4"><span {eq name="datatype" value="4"} class="active" {/eq} >√</span>待确认</li>
+          <li data-type="3"><span {eq name="datatype" value="3"} class="active" {/eq} >√</span>已出彩</li>
+        </ul>
+      </div>
+
+    <div class="orderlist">
+      <div class="content">
+
+      </div>
+    </div>
+
+    {eq  name="datatype" value="2"}
+    <div class="actions">
+      <ul>
+        <li class="checkall" checkall="no">全选</li>
+        <li class="caritem" data-type="1">要车</li>
+        <li class="redelivery1" data-type="2">复投一单</li>
+        <li class="redelivery2" data-type="3">复投两单</li>
+        <li class="redelivery3" data-type="4"> 复投三单</li>
+      </ul>
+    </div>
+    {/eq}
+
+
+    <script src="__JS__/jquery.min.js"></script>
+    <script type="text/javascript" src="__ADMIN__/lib/layer/2.4/layer.js"></script>
+    <script src="__WAP__/js/orders.js"></script>
+    <script src="__WAP__/js/dropload.min.js"></script>
+    <script>
+        $(function () {
+        // 每页展示4个
+        var num = {$pageinfo.per_page};
+        var total = {$pageinfo.total};
+        var pageStart = 0;
+        var datatype={$datatype};
+        // dropload
+        var dropload = $('.orderlist').dropload({
+          scrollArea: window,
+          loadDownFn: function (me) {
+            // 加载菜单一的数据
+            var url ="{:url('orders/endorders')}?page=" + (pageStart + 1)+"&datatype="+datatype;
+            $.ajax({
+              type: 'post',
+              url: url,
+              dataType: 'json',
+              success: function (data) {
+                var result = '';
+                for (var i = 0; i < data.data.length; i++) {
+                  order = data.data[i];
+                  sortid = (order.isshow === 0) ? "等待排单" : order.sortid;
+                      sortid = (sortid==null)?"等待排单":sortid;
+                  if(order.issend==0){
+                    issend="未出彩";
+                  }else if(order.issend==1){
+                    issend="预出彩";
+                  }else if(order.issend==2){
+                    issend="已出彩";
+                  }else{
+                    issend="待确认";
+                  }
+                  result += '<ul><li>排单编号：'+sortid+'</li><li>是否出彩：'+issend+'</li>';
+                  result += '<li> 入单人：' + order.remituser + ' </li><li> 报单日期：' + order.putintime + ' </li>';
+                  result += '<li> 汇款人：' + order.bankuser + '<span dataid="' + order.id + '">√</span> </li></ul>';
+                 
+                }
+                if (data.current_page == Math.ceil(total / num) || total == 0) {
+                  dropload.lock();
+                  dropload.noData();
+                } else {
+                  pageStart = parseInt(data.current_page);
+                  dropload.unlock();
+                  dropload.noData(false);
+                }
+                $('.orderlist>.content').append(result);
+                dropload.resetload();
+              }
+            });
+          }
+        });
+        
+        $("#baselist ul li").click(function(){
+            datatype=$(this).attr("data-type");
+            window.location.href="{:url('orders/endorders')}?datatype="+datatype;
+        })
+        
+        $(".headerfindpwd i").click(function(){
+          window.history.go(-1);
+        })
+        
+        $(".actions ul li").click(function(){
+         index=$(this).index();
+          if(index!=0){
+          var data_type=$(this).attr("data-type");
+          var url="{:url('orders/doredelivery')}?datatype="+data_type;
+          
+          len = $(".orderlist  ul li span.active").length;
+          if(len===0){
+            layer.msg("请选择需要复投的报单！");
+            return false;
+          }
+          var ids="";
+          $(".orderlist ul li span.active").each(function () {
+              ids += $(this).attr("dataid") + ";";
+          });
+          
+          var postdata={ids:ids,biztype:data_type};
+          var tempstr="";
+          if(data_type==1){
+            tempstr="要车";
+          }else if(data_type==2){
+            tempstr="复投一单";
+          }else if (data_type==3){
+            tempstr="复投两单";
+          }else if( data_type==4){
+            tempstr="复投三单";
+          }
+          var confirmstr="是否对所选的报单，进行【"+tempstr+"】操作";
+          layer.confirm(confirmstr,function(){
+            $.post(url,postdata,function(data){
+                if(data.state==="err"){
+                  layer.msg(data.msg);
+                }else{
+                  layer.msg(data.msg);
+                  window.setTimeout(function(){
+                    window.location.reload();
+                  },1000);
+                }
+            });
+          })
+        }
+          
+          
+          
+        });
+       
+        
+
+      });
+    </script>
+  </body>
+</html>

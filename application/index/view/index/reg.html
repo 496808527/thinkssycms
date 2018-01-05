@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {include file='index/header' /}
+    <link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/index1.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/LArea.css"/>
+    <script src="__JS__/jquery.min.js"></script>
+    <script src="__JS__/bootstrap.js"></script>
+  </head>
+  <body>
+    <div class="container">  
+      <div class="form row">  
+        <img class="logos" src="__IMG__/123.png"/> 
+        <form class="form-horizontal col-sm-offset-3 col-md-offset-2" id="register_form" method="post">  
+          <div class="col-sm-9 col-md-9">  
+            <div class="form-group">  
+              <span>真实姓名：</span>
+              <input class="form-control" required="required"  placeholder="真实姓名" name="agentname" data-msg="真实姓名不能为空！" />  
+            </div>
+            <div class="form-group">  
+              <span>密码：</span>
+              <input class="form-control" required="required" type="password" placeholder="密码" name="password" data-msg="登录密码不能为空！"/>  
+            </div>  
+            <div class="form-group">    
+              <span> 身份证号码：</span>
+              <input class="form-control"   required="required" name="agentidcard" placeholder="身份证号码" pattern="^\d{17}[0-9xX]$" data-msg="请填写正确的身份证号码！"/>  
+            </div>
+            <div class="form-group">
+              <span>手机号码：</span>
+              <input class="form-control"   required="required"  placeholder="手机号码" name="agenttel" autofocus="autofocus" pattern="^1[3,4,5,7,8]\d{9}$" data-msg="请填写正确的手机号码！"/>  
+            </div>  
+            <div class="form-group">  
+              <span>收款银行卡号：</span>
+              <input class="form-control"   required="required"  placeholder="收款银行卡号" name="agentbankcard"  data-msg="请填写正确的收款银行卡号！" />  
+            </div>  
+            
+            <div class="form-group">  
+              <span>银行类型：</span>
+              <input class="form-control"  id="bankname" required="required" readonly="readonly"   name="bankname" data-msg="请填写正确的银行类型！" value="建设银行" />  
+            </div>  
+            
+             <div class="form-group">  
+              <span>支行信息：</span>
+              <input class="form-control"   required="required"  placeholder="支行信息" name="bankaddr" data-msg="请填写正确的支行信息"/>  
+            </div> 
+            
+
+            <div class="form-group">
+              <span>收货地址 :</span>
+              <input class="form-control"  placeholder="快递收货地址，请准确填写" name="agentaddr" autofocus="autofocus" id="rimitaddr" data-msg="请填写正确的收货地址！"/>  
+              <input id="value1" type="hidden" value="20,234,504"/>
+            </div>
+            <div class="form-group">
+              <span>申请代理区域 :</span>
+              <input class="form-control"  required="required"   placeholder="代理区域" name="agentarea" autofocus="autofocus" id="rimitarer"  data-msg="请填写正确的代理区域！"/> 
+            </div>
+            <div class="form-group">
+              <span>推荐人 :</span>
+              <input class="form-control"  required="required" value="{$parent}" {notempty name='parent'} readonly="readonly" {/notempty}  placeholder="推荐人" name="agentparent" autofocus="autofocus" /> 
+            </div>
+            <div class="form-group">  
+              <input type="button" class="btn btn-success" id="back_btn" value="注册"  />  
+            </div>  
+          </div>  
+        </form>  
+      </div>  
+    </div>
+
+    <script type="text/javascript" src="__ADMIN__/lib/layer/2.4/layer.js"></script>
+    <script>
+
+ 
+      $(function () {
+        state = true;
+        $("#back_btn").click(function () {
+          $("#register_form input").each(function () {
+            if ($(this).attr("name") != "agentparent") {
+              tempval = $(this).val();
+              datamsg = $(this).attr("data-msg");
+              if (!tempval) {
+                layer.msg(datamsg);
+                state = false;
+                return false;
+              }
+              if ($(this)[0].hasAttribute("pattern")) {
+                reg = eval("/" + $(this).attr("pattern") + "/");
+                if (!reg.test(tempval)) {
+                  layer.msg(datamsg);
+                  state = false;
+                  return false;
+                }
+              }
+            }
+          });
+          if (state) {
+            postdata = $("#register_form").serialize();
+            url = "{:url('reg')}";
+            $.post(url, postdata, function (data) {
+              if (data.state == "err") {
+                layer.msg(data.msg);
+              } else {
+                layer.msg(data.msg);
+                setTimeout(function () {
+                  window.location.href = "{:url('index')}";
+                }, 2000);
+              }
+            })
+          }
+
+        });
+      })
+
+    </script>
+
+  </body>
+</html>

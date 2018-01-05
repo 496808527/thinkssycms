@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {include file='index/header' /}
+ 
+    <link rel="stylesheet" href="__WAP__/css/main.css" />
+    <script type="text/javascript" src="__WAP__/js/rem.js" ></script>
+  </head>
+
+  <body>
+    <div class="header"><i></i>{$name}<!--<span>〓</span>--></div>
+
+    <!--     <div class="menu">
+          <ul>
+             <li topage="{:url('orders/personcenter')}">个人中心</li>
+            <li topage="{:url('orders/index')}">我要报单</li>
+            <li topage="{:url('orders/main')}">待审核的报单</li>
+            <li topage="{:url('orders/mainlist')}">已审核的报单</li>
+            <li topage="{:url('orders/refuselist')}">已拒绝的报单</li>
+            <li topage="{:url('orders/cars')}">直通车</li>
+             <li topage="{:url('orders/baseorder')}">我的底单</li>
+            <li topage="{:url('orders/baselist')}">代理底单</li>
+          </ul>
+        </div>-->
+    <div class="orderlist">
+      <div class="content">
+
+      </div>
+    </div>
+
+    <div class="actions">
+      <ul>
+        <li class="checkall" checkall="no">全选</li>
+        <li class="putincar"  style="width: 80%;background: #09bb07;" >申请直通车</li>
+        <!--<li class="baseorder" >代理底单</li>-->
+      </ul>
+    </div>
+
+    <div class="actionpanel">
+      <p class="active"  datavalue="1">平台积分</p>
+      <p datavalue="2" >购车资格</p>
+    </div>
+
+    <script src="__JS__/jquery.min.js"></script>
+    <script type="text/javascript" src="__ADMIN__/lib/layer/2.4/layer.js"></script>
+    <script src="__WAP__/js/orders.js"></script>
+    <script src="__WAP__/js/dropload.min.js"></script>
+    <script>
+
+
+      $(".actionpanel p").click(function () {
+        count = 15;
+        $(this).addClass("active").siblings().removeClass("active");
+        ids = "";
+        tempcount = 0
+        $(".orderlist ul li span.active").each(function () {
+          if (tempcount < count) {
+            ids += $(this).attr("dataid") + ";";
+            tempcount++;
+          }
+        });
+        url = "{:url('orders/doorders')}";
+        type = $(this).attr("datavalue");
+        postdata = {type: 1, ids: ids, actiontype: type};
+        $.post(url, postdata, function (data) {
+          if (data.state == 'err') {
+            layer.msg(data.msg);
+            setTimeout(function () {
+              $(".actionpanel").hide();
+              setTimeout(function () {
+                window.location.href = data.tourl;
+              }, 1000);
+            }, 1000);
+          } else {
+            layer.msg(data.msg);
+            setTimeout(function () {
+              $(".actionpanel").hide();
+              setTimeout(function () {
+                window.location.href = data.tourl;
+              }, 1000);
+            }, 1000);
+          }
+        });
+      })
+
+      $(".putincar").click(function () {
+        len = $(".orderlist  ul li span.active").length;
+        if (len < 15) {
+          layer.msg("您需要15个报单才能申请直通车");
+          return false;
+        } else {
+          $(".actionpanel").fadeIn(1000);
+        }
+      });
+
+
+//      $(".baseorder").click(function () {
+//        len = $(".orderlist ul li span.active").length;
+//        count = 10;
+//        if (len < count) {
+//          layer.msg("您需要" + count + "个报单才能申请代理底单");
+//          return false;
+//        } else {
+//          ids = "";
+//          tempcount = 0;
+//          $(".orderlist ul li span.active").each(function (index) {
+//            if (tempcount < count) {
+//              ids += $(this).attr("dataid") + ";";
+//              tempcount++;
+//            }
+//          });
+//          url = "{:url('orders/doorders')}";
+//          postdata = {type: 2, ids: ids};
+//          $.post(url, postdata, function (data) {
+//            if (data.state == 'err') {
+//              layer.msg(data.msg);
+//            } else {
+//              layer.msg(data.msg);
+//              setTimeout(function () {
+//                $(".actionpanel").hide();
+//                setTimeout(function () {
+//                  window.location.href = data.tourl;
+//                }, 1000);
+//              }, 1000);
+//            }
+//          });
+//        }
+//      });
+
+      $(function () {
+        // 每页展示4个
+        var num = {$pageinfo.per_page};
+        var total = {$pageinfo.total};
+        var pageStart = 0;
+        // dropload
+        var dropload = $('.orderlist').dropload({
+          scrollArea: window,
+          loadDownFn: function (me) {
+            // 加载菜单一的数据
+            $.ajax({
+              type: 'post',
+              url: "{:url('orders/mainlist')}?page=" + (pageStart + 1),
+              dataType: 'json',
+              success: function (data) {
+                var result = '';
+                for (var i = 0; i < data.data.length; i++) {
+                  order = data.data[i];
+                  sortid = (order.isshow === 0) ? "等待排单" : order.sortid;
+                      sortid = (sortid==null)?"等待排单":sortid;
+                  if(order.issend==0){
+                    issend="未出彩";
+                  }else if(order.issend==1){
+                    issend="预出彩";
+                  }else if(order.issend==2){
+                    issend="已出彩";
+                  }else{
+                    issend="待确认";
+                  };
+                  result += '<ul><li>排单编号：' + sortid + '</li><li>是否出彩：' + issend + '</li>';
+                  result += '<li> 入单人：' + order.remituser + ' </li><li> 报单日期：' + order.putintime + ' </li>';
+                  result += '<li> 汇款人：' + order.bankuser + ' </li>';
+                  result += '<li> 入账时间：' + order.entrytime + ' </li>';
+                  result += '<li> 入单金额：' + order.remitaccount + ' </li>';
+                  result += '<li> 入单人身份证：' + order.remitidcard + ' <span dataid="' + order.id + '">√</span></li></ul>';
+                }
+                if (data.current_page == Math.ceil(total / num) || total == 0) {
+                  dropload.lock();
+                  dropload.noData();
+                } else {
+                  pageStart = parseInt(data.current_page);
+                  dropload.unlock();
+                  dropload.noData(false);
+                }
+                $('.orderlist>.content').append(result);
+                dropload.resetload();
+              }
+            });
+          }
+        });
+      });
+
+
+      
+
+    </script>
+  </body>
+</html>

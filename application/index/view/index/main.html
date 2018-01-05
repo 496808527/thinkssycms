@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {include file='index/header' /}
+    <link rel="stylesheet" type="text/css" href="__CSS__/table.css"/>
+    
+</head>
+<body>
+	<header>
+		<span class="header-span"></span>
+		<span>{$name}</span>
+	</header>
+	<section>
+		
+		<table class="message">
+			<tr>
+				<td><p>汇款人:</p><input type="text" value="" /></td>
+			</tr>
+			<tr>
+				<td><p>汇款日期 :</p><input type="datetime-local" value="" /></td>
+			</tr>
+			<tr>
+				<td><p>汇款人身份证号码 :</p><input type="text" value="" /></td>
+			</tr>
+			<tr>
+				<td><p>汇款人电话 :</p><input type="text" value="" /></td>
+			</tr>
+			<tr>
+              <td><p>积分平台类型 :</p>
+                <select>
+                  <option value="1">云联惠</option>
+                  <option value="2">其他</option>
+                </select>
+              </td>
+			</tr>
+            
+			<tr>
+				<td><p>返还积分ID :</p><input type="text" value="" /></td>
+			</tr>
+			<tr>
+				<td><p>返回积分手机 :</p><input type="text" value="" /></td>
+			</tr>
+			<tr>
+				<td><p>汇款金额 :</p><input type="text" value="" /></td>
+			</tr>
+			<tr>
+				<td style="border: none;"><p>上传汇款凭证 :</p><input type="text" value="" />
+                
+                </td>
+			</tr>
+            
+		</table>
+	</section>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="__UPLOAD__/upload.css" />
+
+  </head>
+
+  <body>
+    <div class="uploadMain">
+      <!--<h3>文件上传</h3>-->
+      <div class="form-control">
+        <form method="post" enctype="multipart/form-data" id="myform">
+
+          <div class="inputfile">选择文件<input type="file" name="file" /></div>
+          <div class="fileinfo"> </div>
+          <input type="hidden" id="uploadid" value="{$uploadid}">
+          <input type="hidden" value="" id="filepath"> 
+        </form>
+
+      </div>
+
+      <div class="progressinfo">
+        <progress></progress><span id="progress"></span>
+        <p id="info"></p>
+      </div>
+
+      <div class="footer"><input type="button" value="确定" class="mybtn"  /></div>
+    </div>
+  </body>
+
+  <script type="text/javascript" src="__ADMIN__/lib/jquery/1.9.1/jquery.min.js"></script> 
+  <script type="text/javascript" src="__ADMIN__/lib/layer/2.4/layer.js"></script>
+  <script src="__UPLOAD__/upload.js"></script>
+  <script  type="text/javascript">
+    var index = parent.layer.getFrameIndex(window.name);
+    $(":file").change(function () {
+      var file = this.files[0]; //假设file标签没打开multiple属性，那么只取第一个文件就行了
+      name = file.name;
+      if(!name){
+        layer.msg("请选择文件");
+        return false;
+      }
+      size = file.size;
+      type = file.type;
+      url = window.URL.createObjectURL(file); //获取本地文件的url，如果是图片文件，可用于预览图片
+      form = document.getElementById("myform");
+      sendurl = "{:url('util/simpleupload/upload')}";
+      savepath= "{$savepath}";
+      uploadid=$("#uploadid").val();
+      filedata = {file:file,name: name, size: size, type: type, fileurl: url, form: form, sendurl: sendurl,uploadid:uploadid,savepath:savepath}
+      simple = new SimpleUpload(filedata);
+      simple.Upload(simple);
+    })
+    
+    
+    $(".mybtn").click(function(){
+      filepath = $("#filepath").val();
+      control='#{$control}';
+      parent.$(control).val(filepath);
+      parent.layer.close(index);
+    })
+  </script>	
+
+</html>

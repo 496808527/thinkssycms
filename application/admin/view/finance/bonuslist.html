@@ -1,0 +1,124 @@
+{include file='index/meta' /}
+
+<title>{$title}</title>
+</head>
+<body>
+  <nav class="breadcrumb">
+
+    {notempty name="menustr"}
+    {$menustr}
+    {/notempty}
+
+
+    <a class="btn btn-success btn-refresh radius r" style="line-height:1.6em;margin-top:3px" href="javascript:;" title="刷新" >
+      <i class="Hui-iconfont">&#xe68f;</i></a>
+  </nav>
+
+  <div class="page-container">
+    <form method="post">
+      <div class="text-c">
+        <input type="text" class="input-text" style="width:250px" placeholder="请输入代理商编号或者姓名" id="" name="agentno" value="{notempty name='parm.agentno'}{$parm['agentno']}{/notempty}">
+       
+        <input type="text" onfocus="WdatePicker()" id="logmin" placeholder="奖金发放开始时间" class="input-text Wdate"
+               style="width:120px;" name='begintime' value="{notempty name='parm.begintime'}{$parm['begintime']}{/notempty}">
+         -
+        <input type="text" onfocus="WdatePicker()" id="logmax"  placeholder="奖金发放结束时间" class="input-text Wdate" 
+               style="width:120px;" name="endtime" value="{notempty name='parm.endtime'}{$parm['endtime']}{/notempty}">
+        
+        <button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+      </div>
+    </form>
+    {notempty name="actions.PanelAction"}
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+      {foreach name='actions.PanelAction' item='item'}
+      <span class="l"> 
+        <a class="btn btn-primary radius" href="javascript:admin_role_add('{$item['permname']}','{:url($item['permurl'],array('tagrole'=>$item['id']))}')" >
+          <i class="Hui-iconfont">{$item["permcss"]? $item["permcss"]:"&#xe600;"}</i>
+          {$item['permname']}
+        </a> </span>
+      {/foreach}
+    </div>
+    {/notempty}
+    <table class="table table-border table-bordered table-bg mt-20">
+      <thead>
+        <tr>
+          <th scope="col" colspan="9">奖金发放记录</th>
+        </tr>
+        <tr class="text-c">
+   
+          <th width="30">序号</th>
+          <th width="50">代理商</th>
+          <th width="60">报单编号</th>
+          <th width="100">奖金类型</th>
+          <th width="100">奖金额度</th>
+          <th width="60">推荐人</th>
+          <th width="50">推荐人奖励</th>
+          <th width="120">发放时间</th>
+          <th width="80">处理人</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+      {notempty name="list"}
+        {foreach name='list' item='order'}
+        <tr class="text-c data-item" data-id="{$order.id}" >
+          <td >{$key+1}</td>
+          <td >{$order.agentname}</td>
+          <td >{$order.sortid?$order.sortid:$order.orderslist}</td>
+          <td >{$biztype[$order.biztype]}</td>
+          <td >{$order.account}</td>
+          <td >{$order.pagentname}</td>
+          <td >{$order.paccount}</td>
+          <td >{$order.biztime}</td>
+          <td >{$order.username}</td>
+        </tr>
+        {/foreach}
+        {else}
+      <tr class="text-c"><td colspan="9">暂无数据</td></tr>
+      {/notempty}
+      </tbody>
+    </table>
+  </div>
+
+  {$page}
+  
+
+  {include file='index/footer' /}
+  <script type="text/javascript" src="__ADMIN__/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+  <script  type="text/javascript">
+    /*管理员-角色-添加*/
+    function admin_role_add(title, url, w, h){
+    if($(":checked").length>=1){
+        id=""; 
+        $(":checked").each(function(){
+           if($(this).val()&&$(this).attr("id")!="checkall"){
+             id+=$(this).val()+";";
+           }
+         })
+         url+="?id="+id;
+         layer_show(title, url, w, h);
+       }else{
+         layer.msg("请选择需要发放的报单", {icon: 2, time: 1000});
+       }
+    }
+    
+    $(".btn-refresh").click(function(){
+     location.replace(location.href)
+    });
+    
+    
+    function admin_week_add(title, url, w, h){
+      layer_show(title, url, w, h);
+    }
+    
+    $(".btn-refresh").click(function(){
+     location.replace(location.href)
+    });
+  
+   
+
+  </script>
+
+</body>
+</html>

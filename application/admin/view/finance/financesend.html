@@ -1,0 +1,93 @@
+{include file='index/meta' /}
+
+</head>
+<body>
+     <div class="cl pd-5 bg-1 bk-gray mt-20">
+      <span class="l ml-5"> 
+        <a class="btn btn-primary radius" href="javascript:export_orders();" >
+          <i class="Hui-iconfont">&#xe644;</i>
+          导出
+        </a> </span>
+    </div>
+  
+<article class="page-container">
+  <form class="form form-horizontal" id="form-admin-add" autocomplete="off" >
+      <input type="hidden" name="orderid" value="{$id}">
+      {foreach name='list' item="info"}
+      <ul class="orderlist">
+        <li><span>代理商：</span><label>{$info["agentname"]}</label></li>
+        <li><span>代理商收款账号：</span><label>{$info["agentbankcard"]}</label></li>
+        <li><span>报单数目：</span><label> {$info["ordercount"]}</label></li>
+        <li><span>代理商奖金额度：</span><label>{$info["account"]}</label></li>
+        {neq name="info.agentparent" value="YT0000001"}
+        <li><span>推荐人：</span><label>{$info["parentname"]}</label></li>
+        <li><span>推荐人收款账号：</span><label>{$info["pbankcard"]}</label></li>
+        <li><span>推荐人奖金额度：</span><label>{$info["paccount"]}</label></li>
+        {/neq}
+      </ul>
+      
+      {/foreach}
+      
+      <div class="orderaction"><input class="btn btn-primary radius" type="button" onclick="submitform()" value="&nbsp;&nbsp;发放 &nbsp;&nbsp;"></div>
+    </form>
+</article>
+  
+  
+{include file='index/footer' /}
+
+  <!--请在下方写此页面业务相关的脚本-->
+  <script type="text/javascript" src="__ADMIN__/lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+  <script type="text/javascript" src="__ADMIN__/lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+  <script type="text/javascript" src="__ADMIN__/lib/jquery.validation/1.14.0/messages_zh.js"></script> 
+  <script type="text/javascript">
+            $(function () {
+              $('.skin-minimal input').iCheck({
+                checkboxClass: 'icheckbox-blue',
+                radioClass: 'iradio-blue',
+                increaseArea: '20%'
+              });
+            });
+
+            function TextLen() {
+              $(".textarea").Huitextarealength({
+                minlength: 10,
+                maxlength: 100.
+              });
+            }
+            
+            function export_orders(){
+                var title="导出月报表信息";
+                var url="{:url('export/weekfinanceexport')}";
+                layer_show(title,url,620,400);
+            }
+
+            
+            
+            function submitform() {
+              formdata=$("#form-admin-add").serialize();
+              $.ajax({
+                type: 'post',
+                data: formdata,
+                url: "{:url('admin/finance/dofinancesend')}",
+                success: function (data) {
+                  if(data==1){
+                    layer.msg('操作成功!', {icon: 1, time: 1000});
+                    setTimeout(function(){
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.$('.btn-refresh').click();
+                    parent.layer.close(index);},1500);
+                  }else{
+                    layer.msg(data, {icon: 2, time: 1000});
+                  }
+                },
+                error: function (XmlHttpRequest, textStatus, errorThrown) {
+                  layer.msg('error!', {icon: 1, time: 1000});
+                }
+              });
+            }
+
+
+  </script> 
+  <!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

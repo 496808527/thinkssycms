@@ -1,0 +1,21 @@
+
+
+
+<script type="text/javascript" src="__ADMIN__/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="__ADMIN__/lib/jquery-ui/1.9.1/jquery-ui.min.js"></script> 
+<script type="text/javascript" src="__ADMIN__/lib/jquery.SuperSlide/2.1.1/jquery.SuperSlide.min.js"></script>
+<script type="text/javascript" src="__ADMIN__/h-ui/js/H-ui.js"></script>
+<script type="text/javascript" src="__ADMIN__/h-ui.admin/js/H-ui.admin.js"></script> 
+<script type="text/javascript" src="__ADMIN__/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript">
+  function clearCache(){
+    $.get("{:url('Websystem/clearCache')}",function(){
+      window.location.reload();
+    })
+  }
+  
+  function baseOpen(title,url,w,h){
+    layer_show(title, url,w,h);
+  }
+  
+</script>

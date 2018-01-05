@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {include file='index/header' /}
+    <link rel="stylesheet" href="__WAP__/css/main.css" />
+    <script type="text/javascript" src="__WAP__/js/rem.js" ></script>
+  </head>
+
+  <body>
+   <div class="header"><i></i>{$name}<!--<span>〓</span>--></div>
+    
+<!--     <div class="menu">
+      <ul>
+         <li topage="{:url('orders/personcenter')}">个人中心</li>
+        <li topage="{:url('orders/index')}">我要报单</li>
+        <li topage="{:url('orders/main')}">待审核的报单</li>
+        <li topage="{:url('orders/mainlist')}">已审核的报单</li>
+        <li topage="{:url('orders/refuselist')}">已拒绝的报单</li>
+        <li topage="{:url('orders/cars')}">直通车</li>
+         <li topage="{:url('orders/baseorder')}">我的底单</li>
+        <li topage="{:url('orders/baselist')}">代理底单</li>
+      </ul>
+    </div>-->
+
+    <div class="orderlist">
+      <div class="content">
+
+      </div>
+    </div>
+
+ 
+
+
+    <script src="__JS__/jquery.min.js"></script>
+    <script type="text/javascript" src="__ADMIN__/lib/layer/2.4/layer.js"></script>
+    <script src="__WAP__/js/orders.js"></script>
+    <script src="__WAP__/js/dropload.min.js"></script>
+    <script>
+        $(function () {
+        // 每页展示4个
+        var num = {$pageinfo.per_page};
+        var total = {$pageinfo.total};
+        var pageStart = 0;
+        // dropload
+        var dropload = $('.orderlist').dropload({
+          scrollArea: window,
+          loadDownFn: function (me) {
+            // 加载菜单一的数据
+            $.ajax({
+              type: 'post',
+              url: "{:url('orders/recomelist')}?page=" + (pageStart + 1),
+              dataType: 'json',
+              success: function (data) {
+                var result = '';
+                for (var i = 0; i < data.data.length; i++) {
+                  order = data.data[i];
+                  result += '<ul><li>代理商姓名：'+order.agentname+'</li><li>代理手机：'+order.agenttel+'</li>';
+                  result += '<li> 注册时间：' + order.regtime + ' </li>';
+                  result += '<li> 代理区域：' + order.agentarea + '</li></ul>';
+                }
+                if (data.current_page == Math.ceil(total / num) || total == 0) {
+                  dropload.lock();
+                  dropload.noData();
+                } else {
+                  pageStart = parseInt(data.current_page);
+                  dropload.unlock();
+                  dropload.noData(false);
+                }
+                $('.orderlist>.content').append(result);
+                dropload.resetload();
+              }
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

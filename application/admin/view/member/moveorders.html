@@ -1,0 +1,130 @@
+{include file='index/meta' /}
+
+<title>{$title}</title>
+</head>
+<body>
+  <nav class="breadcrumb">
+
+    {notempty name="menustr"}
+    {$menustr}
+    {/notempty}
+
+
+    <a class="btn btn-success btn-refresh radius r" style="line-height:1.6em;margin-top:3px" href="javascript:;" title="刷新" >
+      <i class="Hui-iconfont">&#xe68f;</i></a>
+  </nav>
+
+  <div class="page-container">
+    <div class="warning">
+      <p>1、请在代理商列表中获取需要查询的代理商的信息， 再在使用这个功能</p>
+      <p>2、代理商之间必须有推荐关系，才能平移报单</p>
+      <p>3、新代理商的含义是，需要平移到的目标代理商</p>
+      <p>4、新代理商输入完毕以后，按<font color="black">回车键</font>选取查询的代理商</p>
+    </div>
+    <form method="post">
+      <div>
+
+      <input type="text"  class="input-text width-222"  name="agentname"  placeholder="请输入原代理商姓名或者编号" value="{notempty name='parm.agentname'}{$parm.agentname}{/notempty}">
+      <input type="text"  class="input-text width-222"  name="remituser"  placeholder="请输入原代理单的入单人" value="{notempty name='parm.remituser'}{$parm.remituser}{/notempty}">
+      
+   
+      <select class="input-text width-188"  name="isrecome">
+          <option value="">报单类型</option>
+          {foreach name="searchtype" item="item"}
+          <option value="{$key}" {notempty name='parm.isrecome'} {eq name="key" value="$parm.isrecome"}selected="selected"{/eq}{/notempty} >{$item} </option>
+          {/foreach} value="">报单类型</option>
+          {foreach name="searchtype" item="item"}
+        </select>   
+        <button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+      </div>
+       
+  
+    </form>
+    {notempty name="actions.PanelAction"}
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+
+      {foreach name='actions.PanelAction' item='item'}
+      <span class="l ml-10"> 
+        <a class="btn btn-primary radius" href="javascript:admin_role_add('{$item['permname']}','{:url($item['permurl'],array('tagrole'=>$item['id']))}')" >
+          <i class="Hui-iconfont">{$item["permcss"]? $item["permcss"]:"&#xe600;"}</i>
+          {$item['permname']}
+        </a> </span>
+      {/foreach}
+    </div>
+    {/notempty}
+    
+    <table class="table table-border table-bordered table-bg mt-20 fl">
+      <thead>
+        <tr>
+          <th scope="col" colspan="7">代理商报单列表</th>
+        </tr>
+        <tr class="text-c">
+          <th width="20"><input type="checkbox" id="checkall"></th>
+          <th width="30">代理商</th>
+          <th width="40">排单编号</th>
+          <th width="50">入单人</th>
+          <th width="50">汇款时间</th>
+          <th width="100">代理区域</th>
+          <th width="100">报单类型</th>
+        </tr>
+      </thead>
+      <tbody>
+        {notempty name="list"}
+        {foreach name='list' item='order'}
+        <tr class="text-c data-item">
+          <td ><input name="id[]" type="checkbox" value="{$order.id}"></td>
+          <td >{$order.agentname}</td>
+          <td >{$order.sortid}</td>
+          <td >{$order.remituser}</td>
+          <td >{$order.remittime}</td>
+          <td >{$order.agentarea}</td>
+          <td >{$orderstype[$order["isrecome"]]}</td>
+        </tr>
+        {/foreach}
+        {else}
+        <tr class="text-c"><td colspan="7">暂无数据</td></tr>
+        {/notempty}
+      </tbody>
+    </table>
+     
+    
+  </div>
+  
+  {notempty name="page"}
+    {$page}
+  {/notempty}
+
+  
+
+  {include file='index/footer' /}
+  <script type="text/javascript" src="__ADMIN__/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+  <script  type="text/javascript">
+     $(".btn-refresh").click(function(){
+         location.replace(location.href)
+     });
+
+    
+    
+    function admin_role_add(titel,url){
+      var ids="";
+      $("input:checked").each(function(){
+          if($(this).val()){
+            temp=parseInt($(this).val());
+            if(!isNaN(temp)){
+                ids+=temp+";";
+            }
+         }
+      });
+      if(ids===""){
+        layer.msg("请选择需要平移的数据");
+        return false;
+      }else{
+        url+="?ids="+ids;
+        layer_show(titel,url,780,600);
+      }
+    }
+     
+  </script>
+
+</body>
+</html>

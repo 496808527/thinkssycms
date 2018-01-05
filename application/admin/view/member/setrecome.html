@@ -1,0 +1,93 @@
+{include file='index/meta' /}
+
+</head>
+<body>
+  <article class="page-container">
+    <form class="form form-horizontal" onsubmit="return false;" id="form-admin-add" autocomplete="off" >
+      <input type="hidden" value="{$info['id']}" name="id">
+
+
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>推荐人：</label>
+        <div class="formControls col-xs-8 col-sm-8" style="position: relative">
+          <input type="text" class="input-text" autocomplete="off"  placeholder="推荐人姓名或者编号或者序号" name="agentparent">
+          <div class="memberinfo">
+            <ul>
+
+            </ul>
+
+          </div>
+
+        </div>
+      </div>
+      <div class="row cl" style="margin-top: 220px;">
+        <div class="col-xs-8 col-sm-8 col-xs-offset-4 col-sm-offset-3">
+          <input class="btn btn-primary radius" type="button" onclick="submitform()" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+        </div>
+      </div>
+    </form>
+  </article>
+
+
+  {include file='index/footer' /}
+
+  <!--请在下方写此页面业务相关的脚本-->
+  <script type="text/javascript" src="__ADMIN__/lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+  <script type="text/javascript" src="__ADMIN__/lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+  <script type="text/javascript" src="__ADMIN__/lib/jquery.validation/1.14.0/messages_zh.js"></script> 
+  <script type="text/javascript">
+
+            function submitform() {
+              formdata = $("#form-admin-add").serialize();
+              $.ajax({
+                type: 'post',
+                data: formdata,
+                url: "{:url('setrecome')}",
+                success: function (data) {
+                  if (data.state=="ok") {
+                    layer.msg('操作成功!', {icon: 1, time: 1000});
+                    setTimeout(function () {
+                      var index = parent.layer.getFrameIndex(window.name);
+                      parent.$('.btn-refresh').click();
+                      parent.layer.close(index);
+                    }, 1500);
+                  } else {
+                    layer.msg(data.msg, {icon: 2, time: 1000});
+                  }
+
+                },
+                error: function (XmlHttpRequest, textStatus, errorThrown) {
+                  layer.msg('error!', {icon: 1, time: 1000});
+                }
+              });
+            }
+              
+          $("input[name='agentparent']").keyup(function(e) {
+              var agentparent=$(this).val();
+              var url="{:url('searchmember')}";
+              var parms={keyword:agentparent};
+              if(e.keyCode===13&&agentparent){
+                $.get(url,parms,function(data){
+                  var result="";
+                  for(var i=0;i<data.length;i++){
+                    var info= data[i];
+                    if(typeof(info)!=null||typeof(info)!="undefined"){
+                      result+='<li datano="'+info.agentno+'">'+info.agentarea+'  代理商姓名：'+info.agentname+'  联系电话：'+info.agenttel+'</li>';
+                    }
+                  }
+                  $(".memberinfo ul").html(result);
+                  $(".memberinfo ul").show();
+                });
+              }
+            });
+            
+            $(".memberinfo").on("click","li",function(){
+              var  datano = $(this).attr("datano");
+              $("input[name='agentparent']").val(datano);
+              $(".memberinfo ul").hide();
+            })
+
+  </script> 
+  <!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

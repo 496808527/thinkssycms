@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{include file='index/header' /}
+		<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.css"/>
+		<link rel="stylesheet" type="text/css" href="__CSS__/index.css"/>
+		<script src="__JS__/jquery.min.js"></script>
+		<script src="__JS__/bootstrap.js"></script>
+         <script type="text/javascript" src="__WAP__/js/rem.js" ></script>
+        <link rel="stylesheet" href="__WAP__/css/main.css" />
+	</head>
+	<body>
+       <div class="headerfindpwd"><i></i>{$name}</div>
+		<div class="container">  
+	        <div class="form">  
+	            <img class="logo" src="__IMG__/123.png"/> 
+	            <form class="form-horizontal col-sm-offset-3 col-md-offset-2" id="login_form">  
+	                <div class="col-sm-9 col-md-9">  
+	                    <div class="form-group" style="position: relative">  
+	                        <i class="fa fa-user fa-lg"></i>  
+	                        <input class="form-control required" type="text" placeholder="请输入手机号码" name="username" autofocus="autofocus" maxlength="20"/>  
+                            <span class="code">获取验证码</span>
+	                    </div>  
+	                    <div class="form-group">  
+	                            <i class="fa fa-lock fa-lg"></i>  
+	                            <input class="form-control required" type="text" placeholder="验证码" name="code"/>  
+	                    </div>  
+                        
+                         <div class="form-group">  
+	                            <i class="fa fa-lock fa-lg"></i>  
+	                            <input class="form-control required" type="password" placeholder="新密码" name="password"/>  
+	                    </div> 
+                      
+	                    <div class="form-group">  
+                          <input type="button" class="btn btn-success login" value="确 定"/>  
+                           <input type="hidden" name="__token__" value="{$Request.token}" />
+	                    </div>  
+                      
+                      
+	                </div>  
+	            </form>  
+	        </div>  
+        </div>  
+      <script src="__WAP__/js/orders.js"></script>
+      <script type="text/javascript" src="__ADMIN__/lib/layer/2.4/layer.js"></script>
+      <script>
+        $(".login").click(function(){
+          url="{:url('findpwd')}";
+          postdata=$("#login_form").serialize();
+          $.post(url,postdata,function(data){
+            if(data.state=="err"){
+              layer.msg(data.msg);
+            }else{
+              layer.msg(data.msg);
+              setTimeout(function(){
+                window.location.href=data.tourl;
+              },2000);
+            }
+          })
+        })
+        
+        $(".headerfindpwd i").click(function(){
+          window.location.href="{:url('index/index')}"
+        })
+        
+        $(".code").click(function(){
+          var url="{:url('getmobilecode')}";
+          var phone=$("input[name='username']").val();
+          var phonetest=/^1[3,4,5,7,8]\d{9}$/;
+          if(!phonetest.test(phone)){
+            layer.msg("请输入正确的手机号码");
+          }
+          var postdata={tel:phone};
+          $.post(url,postdata,function(data){
+            layer.msg(data.msg);
+          });
+        })
+        
+      </script>
+	</body>
+</html>
+  

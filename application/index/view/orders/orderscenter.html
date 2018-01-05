@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {include file='index/header' /}
+    <link rel="stylesheet" href="__WAP__/css/main.css" />
+    <script type="text/javascript" src="__WAP__/js/rem.js" ></script>
+  </head>
+  <body>
+    <div class="headerfindpwd"><i></i>{$name}</div>
+
+    <div class="personmenu">
+      <ul>
+        <li topage="{:url('orders/search')}">报单查询<span></span></li>
+        <li topage="{:url('orders/mainlist')}">已审核的报单<span></span></li>
+        <li topage="{:url('orders/main')}">未审核的报单<span></span></li>
+        <li topage="{:url('orders/refuselist')}">已驳回的报单<span></span></li>
+        <li topage="{:url('orders/baseorder')}">我的底单<span></span></li>
+        <li topage="{:url('orders/cars')}">我的直通车<span></span></li>
+        <li topage="{:url('orders/endorders')}">我的出彩单<span></span></li>
+        <li topage="{:url('orders/redellist')}" class="border-none">我的复投单<span></span></li>
+      </ul>
+      
+    </div>
+
+    <div class="footer">
+        <ul>
+          <li>
+            <a href="{:url('orders/index')}">我要报单</a>
+          </li>
+          <li class="active">
+              <a href="{:url('orders/personcenter')}">个人中心</a>
+          </li>
+        </ul>
+      </div>
+
+    <script src="__JS__/jquery.min.js"></script>
+    <script src="__WAP__/js/orders.js"></script>
+    <script>
+      $(".headerfindpwd i").click(function(){
+          window.location.href="{:url('orders/personcenter')}";
+        })
+    </script>
+    
+  </body>
+</html>

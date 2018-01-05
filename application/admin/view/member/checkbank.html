@@ -1,0 +1,125 @@
+{include file='index/meta' /}
+
+<title>{$title}</title>
+</head>
+<body>
+  <nav class="breadcrumb">
+
+    {notempty name="menustr"}
+    {$menustr}
+    {/notempty}
+
+    <a class="btn btn-success btn-refresh radius r" style="line-height:1.6em;margin-top:3px" href="javascript:;" title="刷新" >
+      <i class="Hui-iconfont">&#xe68f;</i></a>
+  </nav>
+
+  <div class="page-container">
+    <form method="post">
+      <div class="search">
+        
+            <input type="text" class="input-text text width-188 ml-20"  placeholder="请输入代理商编号或者姓名" id="" name="agentno" value="{notempty name='parm.agentno'}{$parm['agentno']}{/notempty}" >
+            <input type="text" class="input-text text width-188 ml-20"  placeholder="请输入代理地区" id="" name="agentarea" value="{notempty name='parm.agentarea'}{$parm['agentarea']}{/notempty}"  >
+            <input type="text" onfocus="WdatePicker()" id="logmin" placeholder="申请开始时间" class="input-text Wdate width-188 ml-20"  name='begintime' 
+                   value="{notempty name='parm.begintime'}{$parm['begintime']}{/notempty}">
+            <input type="text" onfocus="WdatePicker()" id="logmax"  placeholder="申请结束时间" class="input-text Wdate width-188 ml-20"  name="endtime"
+                   value="{notempty name='parm.endtime'}{$parm['endtime']}{/notempty}">
+            <select class="input-text width-188 ml-20"  name="state">
+              <option value="">请选择审核状态</option>
+              {foreach name="stateselect" item="state"}
+              <option value="{$key}" {notempty name="parm.state"}{eq name="parm.state" value="$key"} selected="selected" {/eq}{/notempty} >{$state}</option>
+              {/foreach}      
+            </select>
+            
+            <button type="submit" class="btn btn-success ml-20" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+         
+      </div>
+    </form>
+    
+   {notempty name="actions.PanelAction"}
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+      {foreach name='actions.PanelAction' item='item'}
+      <span class="l ml-10"> 
+        <a class="btn btn-primary radius" href="javascript:admin_role_add('{$item['permname']}','{:url($item['permurl'],array('tagrole'=>$item['id']))}')" >
+          <i class="Hui-iconfont">{$item["permcss"]? $item["permcss"]:"&#xe600;"}</i>
+          {$item['permname']}
+        </a> </span>
+      {/foreach}
+    </div>
+  {/notempty}
+     
+     
+    <table class="table table-border table-bordered table-bg mt-20">
+      <thead>
+        <tr>
+          <th scope="col" colspan="15">代理商报单列表</th>
+        </tr>
+        <tr class="text-c">
+          <th width="20"><input type="checkbox" id="checkall"></th>
+          <th>代理商</th>
+          <th>代理区域</th>
+          <th>申请时间</th>
+          <th>旧银行卡</th>
+          <th>新银行卡</th>
+          <th>支行信息</th>
+          <th>状态</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        {notempty name="list"}
+        {foreach name='list' item='info'}
+        <tr class="text-c data-item">
+          <td><input type="checkbox" value="{$info.id}"/></td>
+          <td>{$info.agentname}</td>
+          <td>{$info.agentarea}</td>
+          <td>{$info.putintime}</td>
+          <td>{$info.oldbankcard}</td>
+          <td>{$info.newbankcard}</td>
+          <td>{$info.bankinfo}</td>
+          <td>{$statelist[$info.state]}</td>
+          <td>
+            {eq name="info.state" value="0"}
+            <a title="审核" href="javascript:;"  form-data="{$info.state}"   onclick="admin_role_del('{$info.id}')" class="ml-5" style="text-decoration:none">
+              <i class="Hui-iconfont">&#xe6e1;</i>
+            </a> 
+            {else}
+            已审核  
+            {/eq}
+          
+          </td>
+        </tr>
+        {/foreach}
+        {else}
+        <tr class="text-c"><td colspan="15">暂无数据</td></tr>
+        {/notempty}
+      </tbody>
+    </table>
+  </div>
+  {notempty name="page"}
+  {$page}
+  {/notempty}
+
+
+  {include file='index/footer' /}
+  <script type="text/javascript" src="__ADMIN__/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+  <script  type="text/javascript">
+    $(".btn-refresh").click(function(){
+         location.replace(location.href)
+    });
+    
+    function admin_role_del(id){
+      var url="{:url('setlogstate')}";
+      var poststate={id:id};
+      $.post(url,poststate,function(data){
+        layer.msg(data.msg);
+        setTimeout(function(){
+           $(".btn-refresh").click();
+        },1000)
+      })
+    }
+
+  </script>
+
+</body>
+</html>
