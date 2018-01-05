@@ -32,17 +32,7 @@ class Index extends AdminCommon
     
     
     public function welcome(){
-      $logic=new WelComeLogic();
-      $agents = $logic->YesterdayAgents();
-      $cars = $logic->YesterdayCars();
-      $finance= $logic->YesterdayFinance();
-      $orders = $logic->YesterdayOrders();
-      $sorts = $logic->YesterdaySort();
-      $this->assign("agents",$agents);
-      $this->assign("cars",$cars);
-      $this->assign("finance",$finance);
-      $this->assign("orders",$orders);
-      $this->assign("sorts",$sorts);
+      
       return $this->fetch();
     }
     

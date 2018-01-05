@@ -1,6 +1,4 @@
 {include file='index/meta' /}
-
-<title>{$title}</title>
 </head>
 <body>
   <nav class="breadcrumb">
@@ -103,10 +101,6 @@
     //layer.msg('已删除!', {icon: 1, time: 1000});
     });
     }
-
-    $(".btn-refresh").click(function(){
-    location.replace(location.href);
-    })
 
     $(".text-c").click(function(){
       id = $(this).attr("data-id");
