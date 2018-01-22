@@ -11,7 +11,9 @@
           <span class="select-box" >
             <select class="select" size="1" name="parentid">
               <option value="0" selected>根目录</option>
-              {$tree}
+              {notempty name="tree"}
+                {$tree}
+              {/notempty}
             </select>
           </span> 
         </div>
@@ -44,6 +46,29 @@
           </div>
         </div>
       </div>
+      
+       <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>跳转方式：</label>
+        <div class="formControls col-xs-8 col-sm-8">
+          <span class="select-box" >
+            <select class="select" size="1" name="jumpway">
+              <option value="" selected>选择跳转方式</option>
+              {volist name="jump_way" id="way" }
+              <option value="{$key}" {eq name="key" value="$info['jumpway']"}selected{/eq}  >{$way}</option>
+              {/volist}
+            </select>
+          </span> 
+        </div>
+      </div>
+      
+      <div class="row cl jumpway {:in_array($info['jumpway'], [0,1,3])?'hidden':''}">
+         <label class="form-label col-xs-4 col-sm-3">窗口询问语：</label>
+        <div class="formControls col-xs-8 col-sm-8">
+          <textarea name="jumpask" cols="" rows="" class="textarea"  placeholder="说点什么...100个字符以内" dragonfly="true" onKeyUp="TextLen()">{$info["jumpask"]}</textarea>
+          <p class="textarea-numberbar"><em class="textarea-length">{$info["jumpask"]|mb_strlen=###,'utf-8'}</em>/100</p>
+        </div>
+      </div>
+      
       
       
 
@@ -127,7 +152,18 @@
                   $(".actiontype").addClass("hidden");
                   $("input[name='actiontype']").attr("disabled","disabled");
                 }
-            })
+            });
+            
+            $("select[name='jumpway']").change(function(){
+                actype = $(this).val();
+                if(actype=="2"||actype=="4"){
+                  $(".jumpway").removeClass("hidden");
+                  $("input[name='jumpway']").removeAttr("disabled");
+                }else{
+                  $(".jumpway").addClass("hidden");
+                  $("input[name='jumpway']").attr("disabled","disabled");
+                }
+            });
 
 
             function submitform() {

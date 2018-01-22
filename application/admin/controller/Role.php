@@ -16,6 +16,14 @@ class Role extends AdminCommon {
       "1" => "权限",
       "2" => "操作"
   ];
+  
+  private $Jump_Way=[
+      "1" => "新开弹窗",
+      "2" => "询问弹窗",
+      "3" => "静默窗口",
+      "4" => "询问静默窗口",
+      "5" => "普通跳转"
+  ];
 
   /**
    * 
@@ -166,6 +174,7 @@ class Role extends AdminCommon {
       $this->assign("info", $info);
       $this->assign("tree", $tree);
       $this->assign("action_perm", $this->Action_Perm);
+      $this->assign("jump_way", $this->Jump_Way);
       return $this->fetch();
     } else {
       $data = Request::instance()->post();

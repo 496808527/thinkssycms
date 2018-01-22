@@ -8,22 +8,79 @@
 <script type="text/javascript" src="__ADMIN__/h-ui.admin/js/H-ui.admin.js"></script> 
 <script type="text/javascript" src="__ADMIN__/lib/layer/2.4/layer.js"></script>
 <script type="text/javascript">
-  function clearCache(){
-    $.get("{:url('Websystem/clearCache')}",function(){
+  function clearCache() {
+    $.get("{:url('Websystem/clearCache')}", function () {
       window.location.reload();
     })
   }
-  
-  function baseOpen(title,url,w,h){
-    layer_show(title, url,w,h);
+
+  $(function () {
+    $('.skin-minimal input').iCheck({
+      checkboxClass: 'icheckbox-blue',
+      radioClass: 'iradio-blue',
+      increaseArea: '20%'
+    });
+  });
+
+  function TextLen() {
+    $(".textarea").Huitextarealength({
+      minlength: 10,
+      maxlength: 100.
+    });
   }
-  
-  function baseJump(url){
-    window.location.href=url;
+
+  function jumpcontrol(obj) {
+    var conf = $(obj);
+    var jumptype = parseInt(conf.attr("jumptype"));
+    var askmsg = conf.attr("askmsg");
+    var url = conf.attr("jumpurl");
+    var title = conf.attr("winname");
+    var w = conf.attr('winwidth');
+    var h = conf.attr('winheight');
+    if (conf.attr("jumptype")) {
+      switch (jumptype) {
+        case 1:
+          layer_show(title, url, w, h);
+          break;
+        case 2:
+          layer.confirm(askmsg, function (index) {
+            layer.close(index);
+            layer_show(title, url, w, h);
+          });
+          break;
+        case 3:
+          $.post(url, function (res) {
+            layer.msg(res.msg);
+          });
+          break;
+        case 4:
+          layer.confirm(askmsg, function (index) {
+            layer.close(index);
+            $.post(url, function (res) {
+              layer.msg(res.msg);
+            });
+          });
+          break;
+        case 5:
+          location.href = url;
+          break;
+        default:
+          location.href = url;
+          break;
+      }
+    }
   }
-  
-  $(".btn-refresh").click(function(){
+
+  function baseOpen(title, url, w, h) {
+    layer_show(title, url, w, h);
+  }
+
+  function baseJump(url) {
+    window.location.href = url;
+  }
+
+  $(".btn-refresh").click(function () {
     location.replace(location.href)
   });
-  
+
 </script>

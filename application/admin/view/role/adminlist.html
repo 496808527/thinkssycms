@@ -23,7 +23,8 @@
     <div class="cl pd-5 bg-1 bk-gray mt-20">
       {foreach name='actions.PanelAction' item='item'}
       <span class="l"> 
-        <a class="btn btn-primary radius" href="javascript:admin_role_add('{$item['permname']}','{:url($item['permurl'],array('tagrole'=>$item['id']))}')" >
+        <a class="btn btn-primary radius" jumpurl="{:url($item['permurl'],array('tagrole'=>$item['id']))}" winname="{$item['permname']}" 
+           jumptype="{$item['jumpway']}" askmsg="{$item['jumpask']}" onclick="jumpcontrol(this)"  winwidth="800" winheight="600"> 
           <i class="Hui-iconfont">{$item["permcss"]? $item["permcss"]:"&#xe600;"}</i>
           {$item['permname']}
         </a> </span>
@@ -73,9 +74,6 @@
         {else}
       <tr class="text-c"><td colspan="7">暂无数据</td></tr>
       {/notempty}
-      
-        
-      
       </tbody>
     </table>
   </div>

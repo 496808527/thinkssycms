@@ -2,26 +2,116 @@
 <title>{$title}</title>
 </head>
 <body>
-<nav class="breadcrumb">
-  
-  {notempty name="menustr"}
-      {$menustr}
+  <nav class="breadcrumb">
+
+    {notempty name="menustr"}
+    {$menustr}
     {/notempty}
 
- 
-  <a class="btn btn-success btn-refresh radius r" style="line-height:1.6em;margin-top:3px" href="javascript:;" title="刷新" >
-    <i class="Hui-iconfont">&#xe68f;</i></a>
-</nav>
-<div class="page-container">
 
-   {notempty name="actions.PanelAction"}
+    <a class="btn btn-success btn-refresh radius r" style="line-height:1.6em;margin-top:3px" href="javascript:;" title="刷新" >
+      <i class="Hui-iconfont">&#xe68f;</i></a>
+  </nav>
+  <div class="page-container">
+
+    {notempty name="actions.PanelAction"}
     <div class="cl pd-5 bg-1 bk-gray">
       {foreach name='actions.PanelAction' item='item'}
       <span class="l"> 
-        <a class="btn btn-primary radius" href="javascript:admin_role_add('{$item['permname']}','{:url($item['permurl'],array('tagrole'=>$item['id']))}')" >
+        <a class="btn btn-primary radius" jumpurl="{:url($item['permurl'],array('tagrole'=>$item['id']))}" winname="{$item['permname']}" 
+           jumptype="{$item['jumpway']}" askmsg="{$item['jumpask']}" onclick="jumpcontrol(this)"  winwidth="800" winheight="600" >
           <i class="Hui-iconfont">{$item["permcss"]? $item["permcss"]:"&#xe600;"}</i>
-           {$item['permname']}
+          {$item['permname']}
         </a> </span>
       {/foreach}
-     </div>
-		{/notempty}
+    </div>
+    {/notempty}
+
+
+    <table class="table table-border table-bordered table-hover table-bg">
+      <thead>
+        <tr>
+          <th scope="col" colspan="6">模型列表</th>
+        </tr>
+        <tr class="text-c">
+          <th width="40">ID</th>
+          <th width="130">模型名称</th>
+          <th width="130">数据库表明</th>
+          <th width="550">模型描述</th>
+          <th width="80">模型状态</th>
+          <th >操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {notempty name='list'}      
+        {volist name='list' id='model'}
+        <tr class="text-c">
+          <td>{$key+1}</td>
+          <td>{$model.modelname}</td>
+
+          <td>{$model.tablename}</td>
+          
+          <td>{$model.modeldiscribe}</td>
+
+          <td>{$model.state?"<font color='green'>有效</font>":"<font color='red'>无效</font>"}</td>
+          <td class="f-14">
+            {foreach name='actions.LineAction' item='line'}
+            <a title="{$line['permname']}" href="javascript:;" jumpurl="{:url($line['permurl'],array('tagrole'=>$line['id'],'id'=>$model['id']))}"   winname="{$line['permname']}" 
+           jumptype="{$line['jumpway']}" askmsg="{$line['jumpask']}" onclick="jumpcontrol(this)"  winwidth="800" winheight="600"  style="text-decoration:none">
+               <i class="Hui-iconfont">{$line["permcss"]}</i>
+            </a> 
+            {/foreach}
+          </td>
+        </tr>
+        {/volist}
+        {/notempty}  
+      </tbody>
+    </table>
+  </div>
+  {notempty name='page'}
+  {$page}
+  {/notempty}
+
+  {include file='index/footer' /}
+
+  <script type="text/javascript">
+
+    /*管理员-角色-添加*/
+    function admin_role_add(title, url, w, h){
+    layer_show(title, url, w, h);
+    }
+    /*管理员-角色-编辑*/
+    function admin_role_edit(title, url, id, w, h){
+    layer_show(title, url, w, h);
+    }
+    /*管理员-角色-删除*/
+    function admin_role_del(obj, id){
+    isdel = $(obj).attr("form-data");
+    confirmstr = (isdel == 1)? "角色禁用须谨慎，确认要禁用吗？":"角色启用须谨慎，确认要启用吗？";
+    layer.confirm(confirmstr, function (index) {
+    //此处请求后台程序，下方是成功后的前台处理
+    $.ajax({
+    type: 'post',
+            data: "id=" + id + "&isdel=" + isdel,
+            url: "{:url('admin/role/roledelet')}",
+            success: function (data) {
+            if (data == 1){
+            layer.msg('操作成功!', {icon: 1, time: 1000});
+            setTimeout(function(){
+            $('.btn-refresh').click();
+            }, 1500);
+            } else{
+            layer.msg('参数错误，小伙子你很坏呀!', {icon: 1, time: 1000});
+            }
+            },
+            error: function (XmlHttpRequest, textStatus, errorThrown) {
+            layer.msg('error!', {icon: 1, time: 1000});
+            }
+    });
+    });
+    }
+
+
+  </script>
+</body>
+</html>

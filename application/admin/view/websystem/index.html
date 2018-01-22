@@ -41,23 +41,6 @@
           <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2">
               <span class="c-red">*</span>
-              网站开关：</label>
-            <div class="formControls col-xs-6 col-sm-8 skin-minimal">
-              <div class="radio-box">
-                <input name="isopen" type="radio" id="sex-1" value="1" {$info["isopen"]?'checked':""}>
-                <label for="sex-1">开市</label>
-              </div>
-              <div class="radio-box">
-                <input type="radio" id="sex-2" name="isopen" value="0" {$info["isopen"]?'':"checked"}>
-                <label for="sex-2">休市</label>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2">
-              <span class="c-red">*</span>
               网站名称：</label>
             <div class="formControls col-xs-6 col-sm-8">
               <input type="text" id="website-title" placeholder="控制在25个字、50个字节以内" value="{$info['websitename']}" name="websitename" class="input-text">
@@ -103,12 +86,7 @@
               <input type="text" id="website-icp" name="webicp"  placeholder="京ICP备00000000号" value="{$info['webicp']}" class="input-text">
             </div>
           </div>
-          <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2">前端注册推荐码：</label>
-            <div class="formControls col-xs-6 col-sm-8">
-              <input type="text" id="website-icp" name="recome"  placeholder="前端注册推荐码" value="{$info['recome']}" class="input-text">
-            </div>
-          </div>
+         
           
           <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2">对账模板：</label>
@@ -117,7 +95,6 @@
                    class="input-text" onclick="admin_role_add('上传对账模板','{:url("util/Simpleupload/index",['t'=>rand(),"con"=>"excelmodel"])}',420,360)" >
             </div>
           </div>
-
         </div>
 
         <!--此处可以循环 end -->
