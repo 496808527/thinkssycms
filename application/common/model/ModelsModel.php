@@ -25,4 +25,9 @@ class ModelsModel extends Model {
        return self::where($where)->paginate($pagesize);
     }
   }
+  
+  public function getmodelfields($modelid){
+    return (new FieldsModel())->getmodelfields($modelid);
+  }
+  
 }

@@ -1,82 +1,66 @@
 {include file='index/meta' /}
-
+<title>{$title}</title>
 </head>
 <body>
-  <article class="page-container">
-    <form class="form form-horizontal" id="form-admin-add">
-      <input type="hidden" value="{$info['id']}" name="id">
-      <div class="row cl">
-        <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>模型名称：</label>
-        <div class="formControls col-xs-8 col-sm-8">
-          <input type="text" class="input-text" autocomplete="off" value="{$info['modelname']}"   placeholder="模型名称" name="modelname">
-        </div>
-      </div>
-
-      <div class="row cl">
-        <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>模型表名：</label>
-        <div class="formControls col-xs-8 col-sm-8">
-          <input type="text" class="input-text" autocomplete="off" value="{$info['tablename']}"   placeholder="模型表名" name="tablename">
-        </div>
-      </div>
-
-      <div class="row cl">
-        <label class="form-label col-xs-4 col-sm-3">模型描述：</label>
-        <div class="formControls col-xs-8 col-sm-8">
-          <textarea name="modeldiscribe" cols="" rows="" class="textarea"  placeholder="模型描述" dragonfly="true" onKeyUp="TextLen()">{$info["modeldiscribe"]}</textarea>
-          <p class="textarea-numberbar"><em class="textarea-length">{$info["modeldiscribe"]|mb_strlen=###,'utf-8'}</em>/100</p>
-        </div>
-      </div>
-
-      <div class="row cl">
-        <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>状态：</label>
-        <div class="formControls col-xs-8 col-sm-9 skin-minimal">
-          <div class="radio-box">
-            <input name="state" type="radio" id="sex-1" value="0" {$info["state"]?'':"checked"}>
-            <label for="sex-1">禁用</label>
-          </div>
-          <div class="radio-box">
-            <input type="radio" id="sex-2" name="state" value="1" {$info["state"]?'checked':""}>
-            <label for="sex-2">启用</label>
-          </div>
-        </div>
-      </div>  
-       
-      <div class="row cl">
-        <div class="col-xs-8 col-sm-8 col-xs-offset-4 col-sm-offset-3">
-          <input class="btn btn-primary radius" type="button" onclick="submitform()" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
-        </div>
-      </div>
-    </form>
-  </article>
+  
+  <div class="page-container">
 
 
+    <div class="cl pd-5 bg-1 bk-gray">
+      <span class="l"> 
+        <a class="btn btn-primary radius" jumpurl="{:url('addfield',array('mid'=>$id))}" winname="添加字段" 
+           jumptype="1" askmsg="" onclick="jumpcontrol(this)"  winwidth="700" winheight="500" >
+          <i class="Hui-iconfont">&#xe600;</i>
+          添加字段
+        </a> 
+      </span>
+      
+      <a class="btn btn-success btn-refresh radius r" style="line-height:1.6em;margin-top:3px" href="javascript:;" title="刷新" >
+      <i class="Hui-iconfont">&#xe68f;</i></a>
+    </div>
+
+
+
+    <table class="table table-border table-bordered table-hover table-bg mt-10">
+      <thead>
+        <tr>
+          <th scope="col" colspan="6">字段列表</th>
+        </tr>
+        <tr class="text-c">
+          <th width="100">字段英文名称</th>
+          <th width="150">字段说明</th>
+          <th width="80">是否索引</th>
+           <th width="80">是否为空</th>
+          <th width="80">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {notempty name='list'}      
+        {volist name='list' id='model'}
+        <tr class="text-c">       
+          <td>{$model.fieldname}</td>
+
+          <td>{$model.fielddiscribe}</td>
+          
+          <td>{$model.isindex}</td>
+          <td>{$model.isempty}</td>
+         
+          <td class="f-14">
+            <a title="编辑" href="javascript:;" jumpurl="{:url('addfield',array('id'=>$model['id']))}"   winname="编辑字段" 
+           jumptype="1" askmsg="" onclick="jumpcontrol(this)"  winwidth="750" winheight="500"  style="text-decoration:none">
+               <i class="Hui-iconfont">&#xe60c;</i>
+            </a> 
+          </td>
+        </tr>
+        {/volist}
+        {/notempty}  
+      </tbody>
+    </table>
+  </div>
+  {notempty name='page'}
+  {$page}
+  {/notempty}
   {include file='index/footer' /}
 
-  <!--请在下方写此页面业务相关的脚本-->
-  <script type="text/javascript" src="__ADMIN__/lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
-  <script type="text/javascript" src="__ADMIN__/lib/jquery.validation/1.14.0/validate-methods.js"></script> 
-  <script type="text/javascript" src="__ADMIN__/lib/jquery.validation/1.14.0/messages_zh.js"></script> 
-  <script type="text/javascript">
-    function submitform() {
-      $.ajax({
-        type: 'post',
-        data: $("#form-admin-add").serialize(),
-        url: "{:url('modelbuild/addmodel')}",
-        success: function (data) {
-          layer.msg(data.msg);
-          var index = parent.layer.getFrameIndex(window.name);
-          if(data.state=="ok"){ 
-            window.setTimeout(function(){
-              parent.layer.close(index);
-            },1500);
-          }
-        },
-        error: function (XmlHttpRequest, textStatus, errorThrown) {
-          layer.msg('error!', {icon: 1, time: 1000});
-        }
-      });
-    }
-  </script> 
-  <!--/请在上方写此页面业务相关的脚本-->
 </body>
 </html>
