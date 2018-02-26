@@ -67,6 +67,7 @@
           var index = parent.layer.getFrameIndex(window.name);
           if(data.state=="ok"){ 
             window.setTimeout(function(){
+              parent.$('.btn-refresh').click();
               parent.layer.close(index);
             },1500);
           }

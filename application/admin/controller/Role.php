@@ -5,6 +5,7 @@ namespace app\admin\controller;
 use app\common\controller\AdminCommon;
 use app\common\model\RoleModel;
 use app\common\model\PermModel;
+use app\common\model\ModelsModel;
 use app\common\util\Arrayutil;
 use app\common\model\User;
 use think\Request;
@@ -171,10 +172,12 @@ class Role extends AdminCommon {
       } else {
         $info = NULL;
       }
+      $list= ModelsModel::all(["state"=>1]);
       $this->assign("info", $info);
       $this->assign("tree", $tree);
       $this->assign("action_perm", $this->Action_Perm);
       $this->assign("jump_way", $this->Jump_Way);
+      $this->assign("modellist",$list);
       return $this->fetch();
     } else {
       $data = Request::instance()->post();

@@ -58,6 +58,9 @@
             layer.close(index);
             $.post(url, function (res) {
               layer.msg(res.msg);
+              window.setTimeout(function(){
+                $('.btn-refresh').click();
+              },1500);
             });
           });
           break;

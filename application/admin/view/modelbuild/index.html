@@ -57,7 +57,7 @@
           <td class="f-14">
             {foreach name='actions.LineAction' item='line'}
             <a title="{$line['permname']}" href="javascript:;" jumpurl="{:url($line['permurl'],array('tagrole'=>$line['id'],'id'=>$model['id']))}"   winname="{$line['permname']}" 
-           jumptype="{$line['jumpway']}" askmsg="{$line['jumpask']}" onclick="jumpcontrol(this)"  winwidth="800" winheight="600"  style="text-decoration:none">
+           jumptype="{$line['jumpway']}" askmsg="{$line['jumpask']}" onclick="jumpcontrol(this)"  winwidth="900" winheight="750"  style="text-decoration:none">
                <i class="Hui-iconfont">{$line["permcss"]}</i>
             </a> 
             {/foreach}

@@ -84,6 +84,20 @@
           <input type="text" class="input-text" autocomplete="off" value="{$info['permurl']}"  placeholder="管理URL"  name="permurl">
         </div>
       </div>
+      
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>关联模型：</label>
+        <div class="formControls col-xs-8 col-sm-8">
+           <select class="select" size="1" name="modelid">
+              <option value="" selected>请选择关联模型</option>
+              {volist name="modellist" id="model" }
+              <option value="{$model.id}" {eq name="model.id" value="$info['modelid']"}selected{/eq}  >{$model['modelname']}</option>
+              {/volist}
+            </select>
+        </div>
+      </div>
+      
+      
       <div class="row cl">
         <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>前端CSS：</label>
         <div class="formControls col-xs-8 col-sm-8">

@@ -9,7 +9,7 @@
     <div class="cl pd-5 bg-1 bk-gray">
       <span class="l"> 
         <a class="btn btn-primary radius" jumpurl="{:url('addfield',array('mid'=>$id))}" winname="添加字段" 
-           jumptype="1" askmsg="" onclick="jumpcontrol(this)"  winwidth="700" winheight="500" >
+           jumptype="1" askmsg="" onclick="jumpcontrol(this)"  winwidth="800" winheight="700" >
           <i class="Hui-iconfont">&#xe600;</i>
           添加字段
         </a> 
@@ -39,17 +39,20 @@
         {volist name='list' id='model'}
         <tr class="text-c">       
           <td>{$model.fieldname}</td>
-
           <td>{$model.fielddiscribe}</td>
-          
-          <td>{$model.isindex}</td>
-          <td>{$model.isempty}</td>
-         
+          <td>{$indextype[$model.isindex]}</td>
+          <td>{$isempty[$model.isempty]}</td>
           <td class="f-14">
             <a title="编辑" href="javascript:;" jumpurl="{:url('addfield',array('id'=>$model['id']))}"   winname="编辑字段" 
-           jumptype="1" askmsg="" onclick="jumpcontrol(this)"  winwidth="750" winheight="500"  style="text-decoration:none">
+           jumptype="1" askmsg="" onclick="jumpcontrol(this)"  winwidth="750" winheight="680"  style="text-decoration:none">
                <i class="Hui-iconfont">&#xe60c;</i>
             </a> 
+            
+            <a title="删除" href="javascript:;" jumpurl="{:url('delfield',array('id'=>$model['id']))}"   winname="删除字段" 
+           jumptype="4" askmsg="您是否确认删除此字段？" onclick="jumpcontrol(this)"  winwidth="750" winheight="680"  style="text-decoration:none">
+               <i class="Hui-iconfont">&#xe6e2;</i>
+            </a>
+            
           </td>
         </tr>
         {/volist}

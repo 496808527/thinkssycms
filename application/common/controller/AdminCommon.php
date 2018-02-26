@@ -14,6 +14,7 @@ class AdminCommon extends NormalCommon {
 
   protected $curRoleid; //当前角色ID
   protected $curPermid;  //当前权限ID
+  protected $modelid;
   protected $_adminid;
   protected $_errmsg="系统繁忙，请稍后再试";
   protected $_sucmsg="恭喜您，操作成功";
@@ -87,6 +88,9 @@ class AdminCommon extends NormalCommon {
         $childs = $permModel->permChilds($where);
         $childs = $permModel->formatPerm($childs);
         $this->assign("actions", $childs);
+      }
+      if(strlen($info["modelid"])){
+        $this->modelid=$info["modelid"];
       }
       $this->assign("title", $info["permname"]);
     }

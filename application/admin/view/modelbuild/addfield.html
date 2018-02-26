@@ -29,6 +29,29 @@
       </div>
       
       <div class="row cl">
+        <label class="form-label col-xs-2 col-sm-2"><span class="c-red">*</span>输入类型：</label>
+        <div class="formControls col-xs-10 col-sm-10">
+          <select  class="input-text" placeholder="输入类型" name="inputtype">
+            {notempty name='inputtype'}
+            {foreach name='inputtype' item='input'}
+            <option value="{$key}">{$input}</option>
+            {/foreach}
+            {/notempty}
+          </select>
+        </div>
+      </div>
+      
+      <div class="row cl jumpway {:in_array($info['inputtype'], [4,5])?'':'hidden'}">
+         <label class="form-label col-xs-2 col-sm-2">选项值：</label>
+        <div class="formControls col-xs-10 col-sm-10">
+          <textarea name="fieldoptions" cols="" rows="" class="textarea"  placeholder="例如：1:张三||2:李四||3:王五 这样的格式" dragonfly="true" onKeyUp="TextLen()">{$info["fieldoptions"]}</textarea>
+          <p class="textarea-numberbar"><em class="textarea-length">{$info["fieldoptions"]|mb_strlen=###,'utf-8'}</em>/100</p>
+        </div>
+      </div>
+      
+      
+      
+      <div class="row cl">
         <label class="form-label col-xs-2 col-sm-2"><span class="c-red">*</span>关联关系：</label>
         <div class="formControls col-xs-10 col-sm-10">
           <input type="text" class="input-text" autocomplete="off" value="{$info['fieldrelation']?$info['fieldrelation']:'暂无'}"   placeholder="关联关系" name="fieldrelation">
@@ -63,15 +86,15 @@
       </div>  
       
        <div class="row cl">
-        <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>是否允许为空：</label>
-        <div class="formControls col-xs-9 col-sm-9 skin-minimal">
+        <label class="form-label col-xs-2 col-sm-2"><span class="c-red">*</span>是否允许为空：</label>
+        <div class="formControls col-xs-10 col-sm-10 skin-minimal">
           <div class="radio-box">
             <input type="radio" id="isempty-1" name="isempty"  value="1" {$info["isempty"]==1?'checked':""}>
-            <label for="isempty-1">不允许</label>
+            <label for="isempty-1">允许</label>
           </div>
           <div class="radio-box">
             <input type="radio" id="isempty-2" name="isempty" value="2" {$info["isempty"]==2?'checked':""}>
-            <label for="isempty-2">允许</label>
+            <label for="isempty-2">不允许</label>
           </div>
         </div>
       </div> 
@@ -101,8 +124,8 @@
           var index = parent.layer.getFrameIndex(window.name);
           if(data.state=="ok"){ 
             window.setTimeout(function(){
+              parent.$('.btn-refresh').click();
               parent.layer.close(index);
-              parent.parent.$('.btn-refresh').click();
             },1500);
           }
         },
@@ -111,6 +134,19 @@
         }
       });
     }
+    
+     $("select[name='inputtype']").change(function(){
+          actype = $(this).val();
+          if(actype=="5"||actype=="4"){
+            $(".jumpway").removeClass("hidden");
+            $("input[name='fieldoptions']").removeAttr("disabled");
+          }else{
+            $(".jumpway").addClass("hidden");
+            $("input[name='fieldoptions']").attr("disabled","disabled");
+          }
+      });
+    
+    
   </script> 
   <!--/请在上方写此页面业务相关的脚本-->
 </body>
